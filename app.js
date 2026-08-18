@@ -286,9 +286,38 @@ function renderKPIs(rows) {
     `<span class="num">${fmt(atual.avaliados)}</span> avaliados de <span class="num">${fmt(alunos)}</span> alunos no filtro atual.`;
 }
 
+const THEME_KEY = "fluencia-theme";
+
+function currentTheme() {
+  return document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+}
+
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
+function applyTheme(theme) {
+  const next = theme === "light" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  localStorage.setItem(THEME_KEY, next);
+  const btn = document.getElementById("btnTheme");
+  if (btn) {
+    const isLight = next === "light";
+    btn.setAttribute("aria-checked", String(isLight));
+    btn.title = isLight ? "Modo claro" : "Modo escuro";
+    btn.setAttribute("aria-label", isLight ? "Ativar modo escuro" : "Ativar modo claro");
+  }
+}
+
+function toggleTheme() {
+  applyTheme(currentTheme() === "light" ? "dark" : "light");
+  chartDefaults();
+  render();
+}
+
 function chartDefaults() {
-  Chart.defaults.color = "#ffffff";
-  Chart.defaults.borderColor = "rgba(255,255,255,0.06)";
+  Chart.defaults.color = cssVar("--text") || "#ffffff";
+  Chart.defaults.borderColor = cssVar("--border") || "rgba(255,255,255,0.06)";
   Chart.defaults.font.family = "DM Sans, sans-serif";
   Chart.defaults.plugins.legend.display = false;
 }
@@ -298,7 +327,7 @@ const barValueLabels = {
   afterDatasetsDraw(chart) {
     const { ctx } = chart;
     ctx.save();
-    ctx.fillStyle = "#ffffff";
+    ctx.fillStyle = cssVar("--text") || "#ffffff";
     ctx.font = "600 11px DM Sans, sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "bottom";
@@ -343,7 +372,7 @@ function renderDonut(rows) {
       datasets: [{
         data: values,
         backgroundColor: NIVEIS.map((n) => (!state.nivel || matchesNivel(n.key) ? n.color : `${n.color}55`)),
-        borderColor: "#18181b",
+        borderColor: cssVar("--card") || "#18181b",
         borderWidth: 4,
         hoverOffset: 6,
       }],
@@ -376,6 +405,7 @@ function renderComparativo(rows) {
     return matchesNivel(key) ? color : `${color}55`;
   };
 
+  const ink = cssVar("--text") || "#ffffff";
   upsertChart("chartComparativo", {
     type: "bar",
     plugins: [barValueLabels],
@@ -410,11 +440,11 @@ function renderComparativo(rows) {
         toggleFilter("nivel", nivel);
       },
       scales: {
-        x: { grid: { display: false }, ticks: { color: "#fff", autoSkip: false, maxRotation: 0, minRotation: 0, font: { size: 11 } } },
-        y: { beginAtZero: true, grace: "12%", ticks: { precision: 0, color: "#fff" } },
+        x: { grid: { display: false }, ticks: { color: ink, autoSkip: false, maxRotation: 0, minRotation: 0, font: { size: 11 } } },
+        y: { beginAtZero: true, grace: "12%", ticks: { precision: 0, color: ink } },
       },
       plugins: {
-        legend: { display: true, labels: { boxWidth: 10, usePointStyle: true, color: "#fff" } },
+        legend: { display: true, labels: { boxWidth: 10, usePointStyle: true, color: ink } },
         tooltip: {
           callbacks: {
             label: (ctx) => ` ${ctx.dataset.label}: ${fmt(ctx.raw)} alunos`,
@@ -614,6 +644,7 @@ function bindEvents() {
     btn.addEventListener("click", () => setView(btn.dataset.view));
   });
   document.getElementById("btnResetAll").addEventListener("click", resetAll);
+  document.getElementById("btnTheme").addEventListener("click", toggleTheme);
   document.getElementById("filterEscola").addEventListener("change", (e) => {
     state.escola = e.target.value;
     state.turma = "";
@@ -704,6 +735,7 @@ function setToday() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  applyTheme(localStorage.getItem(THEME_KEY) || currentTheme());
   chartDefaults();
   setToday();
   fillSelects();
