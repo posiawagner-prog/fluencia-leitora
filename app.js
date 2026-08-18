@@ -411,13 +411,25 @@ const donutValueLabels = {
       const radius = (arc.innerRadius + arc.outerRadius) / 2;
       const x = arc.x + Math.cos(mid) * radius;
       const y = arc.y + Math.sin(mid) * radius;
+      const quantity = fmt(value);
       const percent = fmtPct(pct(value, total));
-      const byArc = (radius * angle) / Math.max(percent.length, 1) / 0.62;
+      const byArc = (radius * angle) / Math.max(quantity.length, 1) / 0.62;
       const byRing = ring * 0.52;
       const fontSize = Math.max(6, Math.min(16, byArc, byRing));
+      const outline = Math.max(1.2, fontSize * 0.2);
+
+      if (angle >= 0.42 && fontSize >= 9) {
+        const qtySize = Math.min(fontSize + 1, 14);
+        const pctSize = Math.max(6, fontSize - 1);
+        ctx.font = `700 ${qtySize}px DM Sans, sans-serif`;
+        drawOutlinedText(ctx, quantity, x, y - qtySize * 0.55, Math.max(1.2, qtySize * 0.2));
+        ctx.font = `600 ${pctSize}px DM Sans, sans-serif`;
+        drawOutlinedText(ctx, percent, x, y + pctSize * 0.65, outline);
+        return;
+      }
 
       ctx.font = `700 ${fontSize}px DM Sans, sans-serif`;
-      drawOutlinedText(ctx, percent, x, y, Math.max(1.2, fontSize * 0.2));
+      drawOutlinedText(ctx, `${quantity} · ${percent}`, x, y, outline);
     });
 
     ctx.restore();
