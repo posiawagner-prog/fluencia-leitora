@@ -322,6 +322,16 @@ function chartDefaults() {
   Chart.defaults.plugins.legend.display = false;
 }
 
+function drawOutlinedText(ctx, text, x, y, lineWidth = 3) {
+  ctx.lineJoin = "round";
+  ctx.miterLimit = 2;
+  ctx.lineWidth = lineWidth;
+  ctx.strokeStyle = "rgba(12, 12, 13, 0.72)";
+  ctx.strokeText(text, x, y);
+  ctx.fillStyle = "#ffffff";
+  ctx.fillText(text, x, y);
+}
+
 const barValueLabels = {
   id: "barValueLabels",
   afterDatasetsDraw(chart) {
@@ -340,6 +350,76 @@ const barValueLabels = {
         ctx.fillText(fmt(value), bar.x, bar.y - 4);
       });
     });
+    ctx.restore();
+  },
+};
+
+const stackValueLabels = {
+  id: "stackValueLabels",
+  afterDatasetsDraw(chart) {
+    const { ctx } = chart;
+    ctx.save();
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    chart.data.datasets.forEach((dataset, datasetIndex) => {
+      const meta = chart.getDatasetMeta(datasetIndex);
+      if (!meta.visible) return;
+      meta.data.forEach((bar, index) => {
+        const value = Number(dataset.data[index] || 0);
+        if (!value) return;
+
+        const width = Math.abs(bar.x - bar.base);
+        const height = Math.abs(bar.height);
+        const label = fmt(value);
+        const byWidth = width / Math.max(label.length, 1) / 0.62;
+        const byHeight = height * 0.7;
+        const fontSize = Math.min(11, byWidth, byHeight);
+        if (fontSize < 6.5) return;
+
+        ctx.font = `700 ${fontSize}px DM Sans, sans-serif`;
+        ctx.fillStyle = "#000000";
+        ctx.fillText(label, (bar.base + bar.x) / 2, bar.y);
+      });
+    });
+
+    ctx.restore();
+  },
+};
+
+const donutValueLabels = {
+  id: "donutValueLabels",
+  afterDatasetsDraw(chart) {
+    const { ctx } = chart;
+    const dataset = chart.data.datasets[0];
+    const meta = chart.getDatasetMeta(0);
+    if (!dataset || !meta?.visible) return;
+    const total = dataset.data.reduce((acc, value) => acc + Number(value || 0), 0);
+    if (!total) return;
+
+    ctx.save();
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    meta.data.forEach((arc, index) => {
+      const value = Number(dataset.data[index] || 0);
+      if (!value) return;
+
+      const angle = arc.endAngle - arc.startAngle;
+      const mid = (arc.startAngle + arc.endAngle) / 2;
+      const ring = arc.outerRadius - arc.innerRadius;
+      const radius = (arc.innerRadius + arc.outerRadius) / 2;
+      const x = arc.x + Math.cos(mid) * radius;
+      const y = arc.y + Math.sin(mid) * radius;
+      const percent = fmtPct(pct(value, total));
+      const byArc = (radius * angle) / Math.max(percent.length, 1) / 0.62;
+      const byRing = ring * 0.52;
+      const fontSize = Math.max(6, Math.min(16, byArc, byRing));
+
+      ctx.font = `700 ${fontSize}px DM Sans, sans-serif`;
+      drawOutlinedText(ctx, percent, x, y, Math.max(1.2, fontSize * 0.2));
+    });
+
     ctx.restore();
   },
 };
@@ -367,6 +447,7 @@ function renderDonut(rows) {
 
   upsertChart("chartDonut", {
     type: "doughnut",
+    plugins: [donutValueLabels],
     data: {
       labels: NIVEIS.map((n) => n.label),
       datasets: [{
@@ -378,7 +459,7 @@ function renderDonut(rows) {
       }],
     },
     options: {
-      cutout: "68%",
+      cutout: "58%",
       maintainAspectRatio: false,
       onHover: (e, els) => { e.native.target.style.cursor = els.length ? "pointer" : "default"; },
       onClick: (_, els) => {
@@ -490,6 +571,7 @@ function renderEscolas(rows) {
 
   upsertChart("chartEscolas", {
     type: "bar",
+    plugins: [stackValueLabels],
     data: { labels, datasets },
     options: {
       indexAxis: "y",
