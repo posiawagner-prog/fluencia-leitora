@@ -1,0 +1,8 @@
+*.xlsx
+*.png
+!assets/*.png
+CRM panel UX_UI design.png
+IMG_6725.PNG
+IMG_6726.PNG
+.DS_Store
+Thumbs.db
