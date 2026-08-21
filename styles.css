@@ -352,11 +352,16 @@ html[data-theme="light"] .theme-switch-knob {
   margin-bottom: 16px;
 }
 
-.col-left { display: flex; flex-direction: column; gap: 16px; }
-
-.kpi-grid, .mid-grid {
+.col-left {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  align-content: start;
+}
+
+.stats-col {
+  display: flex;
+  flex-direction: column;
   gap: 14px;
 }
 
@@ -370,18 +375,43 @@ html[data-theme="light"] .theme-switch-knob {
 
 .kpi {
   padding: 16px 18px 18px;
-  cursor: pointer;
   transition: 0.2s ease;
   position: relative;
   overflow: hidden;
 }
 
-.kpi:hover { transform: translateY(-2px); background: var(--card-2); }
+.kpi[data-nivel] { cursor: pointer; }
+.kpi[data-nivel]:hover { transform: translateY(-2px); background: var(--card-2); }
 .kpi.active { outline: 1px solid var(--blue); }
 
 .kpi-title { color: var(--text); font-size: 13px; font-weight: 500; }
 .kpi-value { font-size: 28px; font-weight: 700; letter-spacing: -0.04em; margin: 8px 0 10px; color: var(--text); }
 .kpi-foot { display: flex; align-items: center; gap: 8px; color: var(--text); font-size: 12px; }
+
+.kpi.has-icon { padding-right: 56px; }
+.kpi-icon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+}
+.kpi-icon svg { width: 18px; height: 18px; }
+.kpi-icon.flu { background: rgba(0, 230, 118, 0.14); color: var(--green); }
+.kpi-icon.ini { background: rgba(0, 200, 255, 0.14); color: var(--iniciante); }
+.kpi-icon.pre { background: rgba(255, 149, 0, 0.16); color: var(--pl2); }
+.kpi-icon.tot { background: rgba(61, 123, 255, 0.16); color: var(--blue-soft); }
+.kpi-icon.ava { background: rgba(123, 97, 255, 0.16); color: var(--purple); }
+.kpi-icon.cov { background: rgba(0, 200, 255, 0.14); color: var(--cyan); }
+.kpi-icon-abc {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
 .num { color: var(--text); font-weight: 700; }
 
 .pill {
@@ -560,5 +590,5 @@ tbody tr.clickable { cursor: pointer; }
   .hero-title { font-size: 16px; letter-spacing: 0.03em; }
   .hero-greet > .brand-logo:last-of-type { justify-self: center; }
   .brand-logo { height: 44px; }
-  .kpi-grid, .mid-grid { grid-template-columns: 1fr; }
+  .col-left { grid-template-columns: 1fr; }
 }

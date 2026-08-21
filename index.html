@@ -99,29 +99,8 @@
       <section id="viewDashboard">
         <div class="layout">
           <div class="col-left">
-            <div class="kpi-grid" id="kpiGrid"></div>
-            <div class="mid-grid">
-              <article class="card stat-card" data-nivel="iniciante" title="Clique para filtrar iniciantes">
-                <div class="stat-icon green">
-                  <svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </div>
-                <div>
-                  <div class="stat-value" id="statIniciantes">0</div>
-                  <div class="stat-label">Iniciantes</div>
-                  <p class="stat-hint" id="statIniciantesHint">Leem com apoio, ainda em consolidação.</p>
-                </div>
-              </article>
-              <article class="card stat-card">
-                <div class="stat-icon blue">
-                  <svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-                </div>
-                <div>
-                  <div class="stat-value" id="statCobertura">0%</div>
-                  <div class="stat-label">Cobertura da avaliação</div>
-                  <p class="stat-hint" id="statCoberturaHint">Alunos avaliados sobre o total da turma.</p>
-                </div>
-              </article>
-            </div>
+            <div class="stats-col" id="kpiLeft"></div>
+            <div class="stats-col" id="kpiRight"></div>
           </div>
 
           <article class="card chart-card">
@@ -210,6 +189,6 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <script src="app.js?v=6"></script>
+  <script src="app.js?v=7"></script>
 </body>
 </html>

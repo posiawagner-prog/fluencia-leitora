@@ -243,20 +243,49 @@ function renderKPIs(rows) {
   const preEntPct = pct(preEnt, entrada.avaliados);
   const hasEntrada = entrada.avaliados > 0;
 
-  const kpis = [
+  const esquerda = [
     {
       key: "",
       title: "Total de alunos",
       value: fmt(alunos),
       pill: `<span class="pill neutral">${rows.length} turmas</span>`,
       foot: "Matrículas no recorte atual",
+      icon: `<div class="kpi-icon tot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`,
     },
     {
       key: "",
       title: "Alunos avaliados",
       value: fmt(atual.avaliados),
       pill: `<span class="pill ${pct(atual.avaliados, alunos) >= 90 ? "up" : "neutral"}">${fmtPct(pct(atual.avaliados, alunos))}</span>`,
-      foot: "Cobertura da avaliação",
+      foot: "Quantidade avaliada no filtro atual",
+      icon: `<div class="kpi-icon ava" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3L22 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`,
+    },
+    {
+      key: "",
+      title: "Cobertura da avaliação",
+      value: fmtPct(pct(atual.avaliados, alunos)),
+      pill: `<span class="pill ${pct(atual.avaliados, alunos) >= 90 ? "up" : "neutral"}">${fmt(atual.avaliados)} de ${fmt(alunos)}</span>`,
+      foot: "Avaliados sobre o total de alunos",
+      icon: `<div class="kpi-icon cov" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M21.21 15.89A10 10 0 1 1 8 2.83" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 12A10 10 0 0 0 12 2v10z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`,
+    },
+  ];
+
+  const direita = [
+    {
+      key: "pre",
+      title: "Pré-leitores",
+      value: fmt(pre),
+      pill: pillHtml(hasEntrada ? prePct - preEntPct : null, true),
+      foot: `<span class="num">${fmtPct(prePct)}</span> ainda em pré-leitura`,
+      icon: `<div class="kpi-icon pre" aria-hidden="true"><span class="kpi-icon-abc">ABC</span></div>`,
+    },
+    {
+      key: "iniciante",
+      title: "Iniciantes",
+      value: fmt(atual.iniciante),
+      pill: `<span class="pill neutral">${fmtPct(pct(atual.iniciante, atual.avaliados))}</span>`,
+      foot: "dos avaliados estão no nível iniciante",
+      icon: `<div class="kpi-icon ini" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`,
     },
     {
       key: "fluente",
@@ -264,30 +293,21 @@ function renderKPIs(rows) {
       value: fmt(atual.fluente),
       pill: pillHtml(hasEntrada ? fluPct - fluEnt : null),
       foot: `<span class="num">${fmtPct(fluPct)}</span> do total avaliado`,
-    },
-    {
-      key: "pre",
-      title: "Pré-leitores",
-      value: fmt(pre),
-      pill: pillHtml(hasEntrada ? prePct - preEntPct : null, true),
-      foot: `<span class="num">${fmtPct(prePct)}</span> ainda em pré-leitura`,
+      icon: `<div class="kpi-icon flu" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="m9 11 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`,
     },
   ];
 
-  document.getElementById("kpiGrid").innerHTML = kpis.map((k) => `
-    <article class="card kpi${state.nivel && k.key === state.nivel ? " active" : ""}" data-nivel="${k.key}">
+  const kpiHtml = (k) => `
+    <article class="card kpi${state.nivel && k.key === state.nivel ? " active" : ""}${k.icon ? " has-icon" : ""}"${k.key ? ` data-nivel="${k.key}"` : ""}>
+      ${k.icon || ""}
       <div class="kpi-title">${k.title}</div>
       <div class="kpi-value">${k.value}</div>
       <div class="kpi-foot">${k.pill}<span>${k.foot}</span></div>
     </article>
-  `).join("");
+  `;
 
-  document.getElementById("statIniciantes").textContent = fmt(atual.iniciante);
-  document.getElementById("statIniciantesHint").innerHTML =
-    `<span class="num">${fmtPct(pct(atual.iniciante, atual.avaliados))}</span> dos avaliados estão no nível iniciante.`;
-  document.getElementById("statCobertura").textContent = fmtPct(pct(atual.avaliados, alunos));
-  document.getElementById("statCoberturaHint").innerHTML =
-    `<span class="num">${fmt(atual.avaliados)}</span> avaliados de <span class="num">${fmt(alunos)}</span> alunos no filtro atual.`;
+  document.getElementById("kpiLeft").innerHTML = esquerda.map(kpiHtml).join("");
+  document.getElementById("kpiRight").innerHTML = direita.map(kpiHtml).join("");
 }
 
 const THEME_KEY = "fluencia-theme";
@@ -766,14 +786,10 @@ function bindEvents() {
     syncSelects();
     render();
   });
-  document.getElementById("kpiGrid").addEventListener("click", (e) => {
+  document.getElementById("kpiRight").addEventListener("click", (e) => {
     const card = e.target.closest("[data-nivel]");
     if (!card || !card.dataset.nivel) return;
     toggleFilter("nivel", card.dataset.nivel);
-  });
-  document.querySelectorAll(".stat-card[data-nivel]").forEach((card) => {
-    card.style.cursor = "pointer";
-    card.addEventListener("click", () => toggleFilter("nivel", card.dataset.nivel));
   });
   document.getElementById("donutLegend").addEventListener("click", (e) => {
     const item = e.target.closest("[data-nivel]");
