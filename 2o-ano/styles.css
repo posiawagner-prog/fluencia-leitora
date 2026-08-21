@@ -153,7 +153,13 @@ button, select, input { font-family: inherit; color: inherit; }
 }
 
 .topbar-date { color: var(--muted); font-size: 14px; font-weight: 500; text-align: center; }
-.topbar-actions { display: flex; justify-content: flex-end; align-items: center; gap: 8px; }
+.topbar-actions { display: flex; justify-content: flex-end; align-items: center; gap: 6px; }
+.topbar-actions .icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+}
+.topbar-actions .icon-btn svg { width: 16px; height: 16px; }
 
 .theme-switch {
   width: 52px;
@@ -206,14 +212,15 @@ html[data-theme="light"] .theme-switch-knob {
 }
 
 .avatar {
-  width: 38px;
-  height: 38px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: linear-gradient(180deg, #ffa07a, #ff7b7b);
+  background: linear-gradient(180deg, #34d399, #00e676);
   display: grid;
   place-items: center;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 11px;
+  color: #fff;
 }
 
 .hero {
