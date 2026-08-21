@@ -494,8 +494,9 @@ html[data-theme="light"] .theme-switch-knob {
 }
 
 .legend li:hover, .legend li.active { background: var(--hover); color: var(--text); }
-.legend b { color: var(--text); font-size: 12px; }
+.legend b { color: var(--text); font-size: 12px; text-align: right; line-height: 1.25; max-width: 210px; }
 .swatch { width: 10px; height: 10px; border-radius: 50%; }
+.chart-wrap.escolas.comparativo { height: auto; min-height: 520px; }
 
 .status-row {
   display: grid;

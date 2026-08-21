@@ -64,6 +64,14 @@ function sumLevels(bloco) {
   return NIVEIS.reduce((acc, n) => acc + (bloco[n.key] || 0), 0);
 }
 
+function isComparativo() {
+  return state.periodo === "comparativo";
+}
+
+function periodoUnico() {
+  return state.periodo === "entrada" ? "entrada" : "percurso";
+}
+
 function blocoAtivo(row) {
   if (state.periodo === "entrada") return row.entrada;
   return row.percurso;
@@ -231,9 +239,9 @@ function renderChips() {
 }
 
 function renderKPIs(rows) {
-  const periodo = state.periodo === "entrada" ? "entrada" : "percurso";
-  const atual = aggregate(rows, periodo);
   const entrada = aggregate(rows, "entrada");
+  const percurso = aggregate(rows, "percurso");
+  const atual = isComparativo() ? percurso : aggregate(rows, periodoUnico());
   const alunos = rows.reduce((acc, r) => acc + r.alunos, 0);
   const pre = PRE_KEYS.reduce((acc, k) => acc + atual[k], 0);
   const preEnt = PRE_KEYS.reduce((acc, k) => acc + entrada[k], 0);
@@ -242,6 +250,7 @@ function renderKPIs(rows) {
   const prePct = pct(pre, atual.avaliados);
   const preEntPct = pct(preEnt, entrada.avaliados);
   const hasEntrada = entrada.avaliados > 0;
+  const comparativo = isComparativo();
 
   const esquerda = [
     {
@@ -254,10 +263,14 @@ function renderKPIs(rows) {
     },
     {
       key: "",
-      title: "Alunos avaliados",
+      title: comparativo ? "Avaliados (Percurso)" : "Alunos avaliados",
       value: fmt(atual.avaliados),
-      pill: `<span class="pill ${pct(atual.avaliados, alunos) >= 90 ? "up" : "neutral"}">${fmtPct(pct(atual.avaliados, alunos))}</span>`,
-      foot: "Quantidade avaliada no filtro atual",
+      pill: comparativo
+        ? `<span class="pill neutral">Entrada ${fmt(entrada.avaliados)}</span>`
+        : `<span class="pill ${pct(atual.avaliados, alunos) >= 90 ? "up" : "neutral"}">${fmtPct(pct(atual.avaliados, alunos))}</span>`,
+      foot: comparativo
+        ? `Entrada ${fmt(entrada.avaliados)} · Percurso ${fmt(percurso.avaliados)}`
+        : "Quantidade avaliada no filtro atual",
       icon: `<div class="kpi-icon ava" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3L22 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`,
     },
     {
@@ -265,7 +278,7 @@ function renderKPIs(rows) {
       title: "Cobertura da avaliação",
       value: fmtPct(pct(atual.avaliados, alunos)),
       pill: `<span class="pill ${pct(atual.avaliados, alunos) >= 90 ? "up" : "neutral"}">${fmt(atual.avaliados)} de ${fmt(alunos)}</span>`,
-      foot: "Avaliados sobre o total de alunos",
+      foot: comparativo ? "Cobertura no Percurso — Ciclo II" : "Avaliados sobre o total de alunos",
       icon: `<div class="kpi-icon cov" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M21.21 15.89A10 10 0 1 1 8 2.83" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 12A10 10 0 0 0 12 2v10z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`,
     },
   ];
@@ -415,34 +428,36 @@ const donutValueLabels = {
   id: "donutValueLabels",
   afterDatasetsDraw(chart) {
     const { ctx } = chart;
-    const dataset = chart.data.datasets[0];
-    const meta = chart.getDatasetMeta(0);
-    if (!dataset || !meta?.visible) return;
-    const total = dataset.data.reduce((acc, value) => acc + Number(value || 0), 0);
-    if (!total) return;
-
     ctx.save();
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
-    meta.data.forEach((arc, index) => {
-      const value = Number(dataset.data[index] || 0);
-      if (!value) return;
+    chart.data.datasets.forEach((dataset, datasetIndex) => {
+      const meta = chart.getDatasetMeta(datasetIndex);
+      if (!dataset || !meta?.visible) return;
+      const total = dataset.data.reduce((acc, value) => acc + Number(value || 0), 0);
+      if (!total) return;
 
-      const angle = arc.endAngle - arc.startAngle;
-      const mid = (arc.startAngle + arc.endAngle) / 2;
-      const ring = arc.outerRadius - arc.innerRadius;
-      const radius = (arc.innerRadius + arc.outerRadius) / 2;
-      const x = arc.x + Math.cos(mid) * radius;
-      const y = arc.y + Math.sin(mid) * radius;
-      const percent = fmtPct(pct(value, total));
-      const byArc = (radius * angle) / Math.max(percent.length, 1) / 0.62;
-      const byRing = ring * 0.52;
-      const fontSize = Math.max(6, Math.min(16, byArc, byRing));
-      const outline = Math.max(1.2, fontSize * 0.2);
+      meta.data.forEach((arc, index) => {
+        const value = Number(dataset.data[index] || 0);
+        if (!value) return;
 
-      ctx.font = `700 ${fontSize}px DM Sans, sans-serif`;
-      drawOutlinedText(ctx, percent, x, y, outline);
+        const angle = arc.endAngle - arc.startAngle;
+        const mid = (arc.startAngle + arc.endAngle) / 2;
+        const ring = arc.outerRadius - arc.innerRadius;
+        const radius = (arc.innerRadius + arc.outerRadius) / 2;
+        const x = arc.x + Math.cos(mid) * radius;
+        const y = arc.y + Math.sin(mid) * radius;
+        const percent = fmtPct(pct(value, total));
+        const byArc = (radius * angle) / Math.max(percent.length, 1) / 0.62;
+        const byRing = ring * 0.52;
+        const maxFont = datasetIndex === 0 && chart.data.datasets.length > 1 ? 12 : 16;
+        const fontSize = Math.max(6, Math.min(maxFont, byArc, byRing));
+        const outline = Math.max(1.2, fontSize * 0.2);
+
+        ctx.font = `700 ${fontSize}px DM Sans, sans-serif`;
+        drawOutlinedText(ctx, percent, x, y, outline);
+      });
     });
 
     ctx.restore();
@@ -456,35 +471,76 @@ function upsertChart(id, config) {
 }
 
 function renderDonut(rows) {
-  const periodo = state.periodo === "entrada" ? "entrada" : "percurso";
-  const agg = aggregate(rows, periodo);
+  const comparativo = isComparativo();
+  const entrada = aggregate(rows, "entrada");
+  const percurso = aggregate(rows, "percurso");
+  const agg = comparativo ? percurso : aggregate(rows, periodoUnico());
   const values = NIVEIS.map((n) => agg[n.key]);
+  const valuesEntrada = NIVEIS.map((n) => entrada[n.key]);
+  const valuesPercurso = NIVEIS.map((n) => percurso[n.key]);
   const total = values.reduce((a, b) => a + b, 0);
+  const totalEntrada = valuesEntrada.reduce((a, b) => a + b, 0);
+  const totalPercurso = valuesPercurso.reduce((a, b) => a + b, 0);
+  const border = cssVar("--card") || "#18181b";
+  const colorFor = (n) => (!state.nivel || matchesNivel(n.key) ? n.color : `${n.color}55`);
+
+  document.getElementById("chartDonutTitle").textContent = comparativo
+    ? "Distribuição por nível · Entrada × Percurso"
+    : "Distribuição por nível";
+  document.getElementById("chartDonutSub").textContent = comparativo
+    ? "Anel externo: Entrada · Anel interno: Percurso — Ciclo II"
+    : "Clique em um segmento para filtrar";
 
   document.getElementById("donutLegend").innerHTML = NIVEIS.map((n, i) => {
     const active = Boolean(state.nivel) && matchesNivel(n.key);
+    const detail = comparativo
+      ? `E ${fmt(valuesEntrada[i])} (${fmtPct(pct(valuesEntrada[i], totalEntrada))}) → P ${fmt(valuesPercurso[i])} (${fmtPct(pct(valuesPercurso[i], totalPercurso))})`
+      : `${fmt(values[i])} · ${fmtPct(pct(values[i], total))}`;
     return `<li data-nivel="${n.key}" class="${active ? "active" : ""}">
       <span class="swatch" style="background:${n.color}"></span>
       <span>${n.label}</span>
-      <b>${fmt(values[i])} · ${fmtPct(pct(values[i], total))}</b>
+      <b>${detail}</b>
     </li>`;
   }).join("");
+
+  const datasets = comparativo
+    ? [
+        {
+          label: "Entrada",
+          data: valuesEntrada,
+          backgroundColor: NIVEIS.map(colorFor),
+          borderColor: border,
+          borderWidth: 3,
+          hoverOffset: 4,
+          weight: 1.15,
+        },
+        {
+          label: "Percurso — Ciclo II",
+          data: valuesPercurso,
+          backgroundColor: NIVEIS.map(colorFor),
+          borderColor: border,
+          borderWidth: 3,
+          hoverOffset: 4,
+          weight: 0.85,
+        },
+      ]
+    : [{
+        data: values,
+        backgroundColor: NIVEIS.map(colorFor),
+        borderColor: border,
+        borderWidth: 4,
+        hoverOffset: 6,
+      }];
 
   upsertChart("chartDonut", {
     type: "doughnut",
     plugins: [donutValueLabels],
     data: {
       labels: NIVEIS.map((n) => n.label),
-      datasets: [{
-        data: values,
-        backgroundColor: NIVEIS.map((n) => (!state.nivel || matchesNivel(n.key) ? n.color : `${n.color}55`)),
-        borderColor: cssVar("--card") || "#18181b",
-        borderWidth: 4,
-        hoverOffset: 6,
-      }],
+      datasets,
     },
     options: {
-      cutout: "58%",
+      cutout: comparativo ? "42%" : "58%",
       maintainAspectRatio: false,
       onHover: (e, els) => { e.native.target.style.cursor = els.length ? "pointer" : "default"; },
       onClick: (_, els) => {
@@ -492,9 +548,18 @@ function renderDonut(rows) {
         toggleFilter("nivel", NIVEIS[els[0].index].key);
       },
       plugins: {
+        legend: { display: false },
         tooltip: {
           callbacks: {
-            label: (ctx) => ` ${ctx.label}: ${fmt(ctx.raw)} (${fmtPct(pct(ctx.raw, total))})`,
+            title: (items) => {
+              if (!items.length) return "";
+              const nivel = items[0].label;
+              return comparativo ? `${nivel} · ${items[0].dataset.label}` : nivel;
+            },
+            label: (ctx) => {
+              const tot = ctx.dataset.data.reduce((a, b) => a + Number(b || 0), 0);
+              return ` ${fmt(ctx.raw)} (${fmtPct(pct(ctx.raw, tot))})`;
+            },
           },
         },
       },
@@ -526,7 +591,7 @@ function renderComparativo(rows) {
           barPercentage: 0.72,
         },
         {
-          label: "Percurso",
+          label: "Percurso — Ciclo II",
           data: NIVEIS.map((n) => percurso[n.key]),
           backgroundColor: NIVEIS.map((n) => dim("#009B3A", n.key)),
           borderRadius: 8,
@@ -562,37 +627,93 @@ function renderComparativo(rows) {
 }
 
 function renderEscolas(rows) {
-  const periodo = state.periodo === "entrada" ? "entrada" : "percurso";
+  const comparativo = isComparativo();
+  const periodo = periodoUnico();
   const drillTurmas = Boolean(state.escola);
   const groups = new Map();
 
   rows.forEach((row) => {
     const key = drillTurmas ? `Turma ${row.turma}` : row.escola;
-    if (!groups.has(key)) groups.set(key, { label: key, escola: row.escola, turma: row.turma, ...emptyAgg(), alunos: 0 });
+    if (!groups.has(key)) {
+      groups.set(key, {
+        label: key,
+        escola: row.escola,
+        turma: row.turma,
+        alunos: 0,
+        entrada: emptyAgg(),
+        percurso: emptyAgg(),
+        ...emptyAgg(),
+      });
+    }
     const g = groups.get(key);
     g.alunos += row.alunos;
+    addBloco(g.entrada, row.entrada);
+    addBloco(g.percurso, row.percurso);
     addBloco(g, row[periodo]);
   });
 
+  const sortAgg = (item) => (comparativo ? item.percurso : item);
   const items = [...groups.values()].sort((a, b) => {
-    const va = state.nivel ? countNivel(a) : a.avaliados || sumLevels(a);
-    const vb = state.nivel ? countNivel(b) : b.avaliados || sumLevels(b);
+    const aa = sortAgg(a);
+    const bb = sortAgg(b);
+    const va = state.nivel ? countNivel(aa) : aa.avaliados || sumLevels(aa);
+    const vb = state.nivel ? countNivel(bb) : bb.avaliados || sumLevels(bb);
     return vb - va;
   });
 
-  document.getElementById("chartEscolasTitle").textContent = drillTurmas
+  const titleBase = drillTurmas
     ? `Composição por turma · ${shortSchool(state.escola)}`
     : "Composição por escola";
+  document.getElementById("chartEscolasTitle").textContent = comparativo
+    ? `${titleBase} · Entrada × Percurso`
+    : titleBase;
+  document.getElementById("chartEscolasSub").textContent = comparativo
+    ? "Cada escola: barra superior = Entrada · barra inferior = Percurso — Ciclo II"
+    : "Clique em uma barra ou fatia para filtrar escola e nível";
 
-  const labels = items.map((i) => drillTurmas ? i.label : shortSchool(i.label));
-  const datasets = NIVEIS.filter((n) => matchesNivel(n.key)).map((n) => ({
-    label: n.label,
-    data: items.map((i) => i[n.key]),
-    backgroundColor: n.color,
-    borderSkipped: false,
-    borderRadius: 4,
-    barPercentage: 0.78,
-  }));
+  const wrap = document.getElementById("chartEscolasWrap");
+  wrap.classList.toggle("comparativo", comparativo);
+  wrap.style.height = comparativo ? `${Math.max(520, items.length * 36)}px` : "";
+
+  const labels = items.map((i) => (drillTurmas ? i.label : shortSchool(i.label)));
+  const niveisVisiveis = NIVEIS.filter((n) => matchesNivel(n.key));
+
+  const datasets = comparativo
+    ? [
+        ...niveisVisiveis.map((n) => ({
+          label: `Entrada · ${n.label}`,
+          data: items.map((i) => i.entrada[n.key]),
+          backgroundColor: `${n.color}99`,
+          borderSkipped: false,
+          borderRadius: 3,
+          barPercentage: 0.9,
+          categoryPercentage: 0.78,
+          stack: "entrada",
+          periodo: "entrada",
+          nivelKey: n.key,
+        })),
+        ...niveisVisiveis.map((n) => ({
+          label: `Percurso · ${n.label}`,
+          data: items.map((i) => i.percurso[n.key]),
+          backgroundColor: n.color,
+          borderSkipped: false,
+          borderRadius: 3,
+          barPercentage: 0.9,
+          categoryPercentage: 0.78,
+          stack: "percurso",
+          periodo: "percurso",
+          nivelKey: n.key,
+        })),
+      ]
+    : niveisVisiveis.map((n) => ({
+        label: n.label,
+        data: items.map((i) => i[n.key]),
+        backgroundColor: n.color,
+        borderSkipped: false,
+        borderRadius: 4,
+        barPercentage: 0.78,
+        nivelKey: n.key,
+      }));
 
   upsertChart("chartEscolas", {
     type: "bar",
@@ -605,8 +726,8 @@ function renderEscolas(rows) {
       onClick: (_, els) => {
         if (!els.length) return;
         const item = items[els[0].index];
-        const nivelVisivel = NIVEIS.filter((n) => matchesNivel(n.key));
-        const nivel = nivelVisivel[els[0].datasetIndex]?.key || "";
+        const ds = datasets[els[0].datasetIndex];
+        const nivel = ds?.nivelKey || "";
         const sameSchool = drillTurmas
           ? state.turma === item.turma
           : state.escola === item.escola;
@@ -640,8 +761,7 @@ function renderEscolas(rows) {
 }
 
 function renderStatus(rows) {
-  const periodo = state.periodo === "entrada" ? "entrada" : "percurso";
-  const agg = aggregate(rows, periodo);
+  const agg = aggregate(rows, periodoUnico());
   const pre12 = agg.pl1 + agg.pl2;
   const pre34 = agg.pl3 + agg.pl4;
   const cards = [
@@ -707,6 +827,32 @@ function renderTable(rows) {
 }
 
 function exportCsv(rows) {
+  if (isComparativo()) {
+    const header = [
+      "Escola", "Turma", "Alunos",
+      "Avaliados (Entrada)", ...NIVEIS.map((n) => `${n.label} (Entrada)`),
+      "Avaliados (Percurso)", ...NIVEIS.map((n) => `${n.label} (Percurso)`),
+    ];
+    const lines = [header.join(";")];
+    rows.forEach((row) => {
+      const entrada = row.entrada || emptyAgg();
+      const percurso = row.percurso || emptyAgg();
+      lines.push([
+        row.escola, row.turma, row.alunos,
+        entrada.avaliados || "", ...NIVEIS.map((n) => entrada[n.key] || 0),
+        percurso.avaliados || "", ...NIVEIS.map((n) => percurso[n.key] || 0),
+      ].join(";"));
+    });
+    const blob = new Blob(["\uFEFF" + lines.join("\n")], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "fluencia-leitora-2ano-comparativo.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+    return;
+  }
+
   const periodo = state.periodo === "entrada" ? "Entrada" : "Percurso";
   const header = ["Escola", "Turma", "Alunos", `Avaliados (${periodo})`, ...NIVEIS.map((n) => n.label)];
   const lines = [header.join(";")];

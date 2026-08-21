@@ -86,8 +86,8 @@
           <label class="select">
             <span>Período</span>
             <select id="filterPeriodo">
-              <option value="percurso">Percurso — Ciclo II</option>
               <option value="entrada">Entrada</option>
+              <option value="percurso">Percurso — Ciclo II</option>
               <option value="comparativo">Comparativo</option>
             </select>
           </label>
@@ -120,8 +120,8 @@
           <article class="card chart-card">
             <div class="card-head">
               <div>
-                <h2>Distribuição por nível</h2>
-                <p>Clique em um segmento para filtrar</p>
+                <h2 id="chartDonutTitle">Distribuição por nível</h2>
+                <p id="chartDonutSub">Clique em um segmento para filtrar</p>
               </div>
             </div>
             <div class="donut-layout">
@@ -136,10 +136,10 @@
             <div class="card-head">
               <div>
                 <h2 id="chartEscolasTitle">Composição por escola</h2>
-                <p>Clique em uma barra ou fatia para filtrar escola e nível</p>
+                <p id="chartEscolasSub">Clique em uma barra ou fatia para filtrar escola e nível</p>
               </div>
             </div>
-            <div class="chart-wrap escolas">
+            <div class="chart-wrap escolas" id="chartEscolasWrap">
               <canvas id="chartEscolas"></canvas>
             </div>
           </article>
