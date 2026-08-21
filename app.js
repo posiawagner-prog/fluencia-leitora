@@ -10,34 +10,34 @@ const NIVEIS = [
 const PRE_KEYS = ["pl1", "pl2", "pl3", "pl4"];
 
 const DADOS = [
-  { escola: "AUDÁLIO MACIANO DA SILVA", turma: "ÚNICA", alunos: 13, entrada: { avaliados: 12, pl1: 0, pl2: 1, pl3: 2, pl4: 6, iniciante: 3, fluente: 0 }, percurso: { avaliados: 12, pl1: 1, pl2: 0, pl3: 0, pl4: 4, iniciante: 6, fluente: 1 } },
-  { escola: "ANTÔNIO A. DOS ANJOS", turma: "ÚNICA", alunos: 19, entrada: { avaliados: 19, pl1: 2, pl2: 2, pl3: 0, pl4: 3, iniciante: 12, fluente: 0 }, percurso: { avaliados: 18, pl1: 0, pl2: 1, pl3: 1, pl4: 2, iniciante: 14, fluente: 0 } },
-  { escola: "BARÃO DE ALAGOAS", turma: "ÚNICA", alunos: 20, entrada: { avaliados: 19, pl1: 0, pl2: 2, pl3: 3, pl4: 5, iniciante: 7, fluente: 2 }, percurso: { avaliados: 19, pl1: 0, pl2: 2, pl3: 0, pl4: 2, iniciante: 11, fluente: 4 } },
-  { escola: "VEREADOR J. D. DE BARROS", turma: "ÚNICA", alunos: 11, entrada: null, percurso: null },
-  { escola: "CAPITULINO L. DE ARAÚJO", turma: "ÚNICA", alunos: 17, entrada: { avaliados: 17, pl1: 0, pl2: 0, pl3: 0, pl4: 4, iniciante: 12, fluente: 1 }, percurso: { avaliados: 17, pl1: 0, pl2: 0, pl3: 0, pl4: 1, iniciante: 13, fluente: 3 } },
-  { escola: "WELLINGTON P. FONTES", turma: "A", alunos: 17, entrada: null, percurso: { avaliados: 17, pl1: 0, pl2: 1, pl3: 0, pl4: 4, iniciante: 11, fluente: 1 } },
-  { escola: "WELLINGTON P. FONTES", turma: "B", alunos: 17, entrada: null, percurso: { avaliados: 17, pl1: 2, pl2: 0, pl3: 1, pl4: 1, iniciante: 12, fluente: 1 } },
-  { escola: "WELLINGTON P. FONTES", turma: "C", alunos: 15, entrada: null, percurso: { avaliados: 15, pl1: 2, pl2: 2, pl3: 1, pl4: 1, iniciante: 8, fluente: 1 } },
-  { escola: "ARISTIDES ANTÔNIO DA SILVA", turma: "ÚNICA", alunos: 9, entrada: { avaliados: 7, pl1: 0, pl2: 0, pl3: 2, pl4: 1, iniciante: 4, fluente: 0 }, percurso: { avaliados: 12, pl1: 1, pl2: 0, pl3: 0, pl4: 4, iniciante: 6, fluente: 1 } },
-  { escola: "MANOEL VIEIRA GAD", turma: "ÚNICA", alunos: 14, entrada: null, percurso: { avaliados: 14, pl1: 0, pl2: 0, pl3: 3, pl4: 1, iniciante: 9, fluente: 1 } },
-  { escola: "IMACULADA CONCEIÇÃO", turma: "ÚNICA", alunos: 23, entrada: { avaliados: 25, pl1: 4, pl2: 0, pl3: 2, pl4: 10, iniciante: 9, fluente: 0 }, percurso: { avaliados: 23, pl1: 3, pl2: 1, pl3: 0, pl4: 5, iniciante: 14, fluente: 0 } },
-  { escola: "JOÃO VIEIRA GOMES", turma: "ÚNICA", alunos: 18, entrada: { avaliados: 16, pl1: 1, pl2: 1, pl3: 2, pl4: 6, iniciante: 6, fluente: 0 }, percurso: { avaliados: 15, pl1: 0, pl2: 0, pl3: 0, pl4: 7, iniciante: 8, fluente: 0 } },
-  { escola: "JOSÉ ALVES DA SILVA", turma: "ÚNICA", alunos: 18, entrada: { avaliados: 18, pl1: 2, pl2: 0, pl3: 2, pl4: 5, iniciante: 9, fluente: 0 }, percurso: { avaliados: 16, pl1: 1, pl2: 0, pl3: 6, pl4: 0, iniciante: 7, fluente: 2 } },
-  { escola: "MANOEL LEANDRO PEREIRA", turma: "A", alunos: 17, entrada: null, percurso: { avaliados: 17, pl1: 0, pl2: 0, pl3: 0, pl4: 0, iniciante: 17, fluente: 0 } },
-  { escola: "MANOEL LEANDRO PEREIRA", turma: "B", alunos: 13, entrada: null, percurso: { avaliados: 13, pl1: 0, pl2: 0, pl3: 0, pl4: 2, iniciante: 11, fluente: 0 } },
-  { escola: "MANOEL PEDRO DE MELO", turma: "ÚNICA", alunos: 10, entrada: null, percurso: { avaliados: 10, pl1: 0, pl2: 0, pl3: 0, pl4: 1, iniciante: 7, fluente: 2 } },
-  { escola: "PEDRO F. DAS CHAGAS", turma: "ÚNICA", alunos: 25, entrada: null, percurso: { avaliados: 23, pl1: 0, pl2: 2, pl3: 0, pl4: 1, iniciante: 18, fluente: 2 } },
-  { escola: "POSSIDÔNIO GADI", turma: "ÚNICA", alunos: 13, entrada: null, percurso: { avaliados: 13, pl1: 0, pl2: 0, pl3: 0, pl4: 2, iniciante: 5, fluente: 6 } },
-  { escola: "SANTA ANA", turma: "ÚNICA", alunos: 16, entrada: null, percurso: { avaliados: 15, pl1: 0, pl2: 0, pl3: 2, pl4: 0, iniciante: 4, fluente: 9 } },
-  { escola: "SANTA HELENA", turma: "ÚNICA", alunos: 18, entrada: null, percurso: { avaliados: 17, pl1: 1, pl2: 1, pl3: 1, pl4: 4, iniciante: 9, fluente: 1 } },
-  { escola: "MANOEL BEZERRA LINTO", turma: "ÚNICA", alunos: 12, entrada: null, percurso: { avaliados: 6, pl1: 0, pl2: 0, pl3: 0, pl4: 0, iniciante: 6, fluente: 0 } },
-  { escola: "ELISABETHE J. M. BORGUERS", turma: "A", alunos: 16, entrada: null, percurso: { avaliados: 16, pl1: 0, pl2: 2, pl3: 0, pl4: 5, iniciante: 8, fluente: 1 } },
-  { escola: "ELISABETHE J. M. BORGUERS", turma: "B", alunos: 19, entrada: null, percurso: { avaliados: 14, pl1: 0, pl2: 4, pl3: 0, pl4: 1, iniciante: 9, fluente: 0 } },
-  { escola: "NOSSA S. DE FÁTIMA", turma: "A", alunos: 26, entrada: null, percurso: { avaliados: 25, pl1: 0, pl2: 0, pl3: 0, pl4: 1, iniciante: 13, fluente: 11 } },
-  { escola: "NOSSA S. DE FÁTIMA", turma: "B", alunos: 25, entrada: null, percurso: { avaliados: 25, pl1: 0, pl2: 0, pl3: 1, pl4: 0, iniciante: 24, fluente: 0 } },
-  { escola: "NOSSA S. DE FÁTIMA", turma: "C", alunos: 26, entrada: null, percurso: { avaliados: 2, pl1: 0, pl2: 0, pl3: 0, pl4: 0, iniciante: 0, fluente: 0 } },
-  { escola: "NOSSA S. DE FÁTIMA", turma: "D", alunos: 22, entrada: null, percurso: { avaliados: 22, pl1: 1, pl2: 2, pl3: 1, pl4: 6, iniciante: 12, fluente: 0 } },
-  { escola: "NOSSA S. DE FÁTIMA", turma: "E", alunos: 20, entrada: null, percurso: { avaliados: 20, pl1: 2, pl2: 1, pl3: 8, pl4: 5, iniciante: 4, fluente: 0 } },
+  { escola: "E.M.E.I.F. ANTÔNIO AGOSTINHO DOS ANJOS", turma: "ÚNICA", alunos: 19, entrada: { avaliados: 19, pl1: 2, pl2: 2, pl3: 0, pl4: 3, iniciante: 12, fluente: 0 }, percurso: { avaliados: 18, pl1: 0, pl2: 1, pl3: 1, pl4: 2, iniciante: 14, fluente: 0 } },
+  { escola: "E.M.E.I.F. ARISTIDES ANTÔNIO DA SILVA", turma: "ÚNICA", alunos: 9, entrada: { avaliados: 7, pl1: 0, pl2: 0, pl3: 2, pl4: 1, iniciante: 4, fluente: 0 }, percurso: { avaliados: 12, pl1: 1, pl2: 0, pl3: 0, pl4: 4, iniciante: 6, fluente: 1 } },
+  { escola: "E.M.E.I.F. AUDÁLIO MACIANO DA SILVA", turma: "ÚNICA", alunos: 13, entrada: { avaliados: 12, pl1: 0, pl2: 1, pl3: 2, pl4: 6, iniciante: 3, fluente: 0 }, percurso: { avaliados: 12, pl1: 1, pl2: 0, pl3: 0, pl4: 4, iniciante: 6, fluente: 1 } },
+  { escola: "E.M.E.I.F. BARÃO DE ALAGOAS", turma: "ÚNICA", alunos: 20, entrada: { avaliados: 19, pl1: 0, pl2: 2, pl3: 3, pl4: 5, iniciante: 7, fluente: 2 }, percurso: { avaliados: 19, pl1: 0, pl2: 2, pl3: 0, pl4: 2, iniciante: 11, fluente: 4 } },
+  { escola: "E.M.E.I.F. CAPITULINO LOURENÇO DE ARAÚJO", turma: "ÚNICA", alunos: 17, entrada: { avaliados: 17, pl1: 0, pl2: 0, pl3: 0, pl4: 4, iniciante: 12, fluente: 1 }, percurso: { avaliados: 17, pl1: 0, pl2: 0, pl3: 0, pl4: 1, iniciante: 13, fluente: 3 } },
+  { escola: "E.M.E.I.F. ELISABETHE JACOBA MARIA BORGERS", turma: "A", alunos: 16, entrada: null, percurso: { avaliados: 16, pl1: 0, pl2: 2, pl3: 0, pl4: 5, iniciante: 8, fluente: 1 } },
+  { escola: "E.M.E.I.F. ELISABETHE JACOBA MARIA BORGERS", turma: "B", alunos: 19, entrada: null, percurso: { avaliados: 14, pl1: 0, pl2: 4, pl3: 0, pl4: 1, iniciante: 9, fluente: 0 } },
+  { escola: "E.M.E.I.F. IMACULADA CONCEIÇÃO", turma: "ÚNICA", alunos: 23, entrada: { avaliados: 25, pl1: 4, pl2: 0, pl3: 2, pl4: 10, iniciante: 9, fluente: 0 }, percurso: { avaliados: 23, pl1: 3, pl2: 1, pl3: 0, pl4: 5, iniciante: 14, fluente: 0 } },
+  { escola: "E.M.E.I.F. JOÃO VIEIRA GOMES", turma: "ÚNICA", alunos: 18, entrada: { avaliados: 16, pl1: 1, pl2: 1, pl3: 2, pl4: 6, iniciante: 6, fluente: 0 }, percurso: { avaliados: 15, pl1: 0, pl2: 0, pl3: 0, pl4: 7, iniciante: 8, fluente: 0 } },
+  { escola: "E.M.E.I.F. JOSÉ ALVES DA SILVA", turma: "ÚNICA", alunos: 18, entrada: { avaliados: 18, pl1: 2, pl2: 0, pl3: 2, pl4: 5, iniciante: 9, fluente: 0 }, percurso: { avaliados: 16, pl1: 1, pl2: 0, pl3: 6, pl4: 0, iniciante: 7, fluente: 2 } },
+  { escola: "E.M.E.I.F. MANOEL BEZERRA LINTO", turma: "ÚNICA", alunos: 12, entrada: { avaliados: 12, pl1: 1, pl2: 0, pl3: 0, pl4: 6, iniciante: 4, fluente: 1 }, percurso: { avaliados: 6, pl1: 0, pl2: 0, pl3: 0, pl4: 0, iniciante: 6, fluente: 0 } },
+  { escola: "E.M.E.I.F. MANOEL LEANDRO PEREIRA", turma: "A", alunos: 17, entrada: null, percurso: { avaliados: 17, pl1: 0, pl2: 0, pl3: 0, pl4: 0, iniciante: 17, fluente: 0 } },
+  { escola: "E.M.E.I.F. MANOEL LEANDRO PEREIRA", turma: "B", alunos: 13, entrada: null, percurso: { avaliados: 13, pl1: 0, pl2: 0, pl3: 0, pl4: 2, iniciante: 11, fluente: 0 } },
+  { escola: "E.M.E.I.F. MANOEL PEDRO DE MELO", turma: "ÚNICA", alunos: 10, entrada: { avaliados: 10, pl1: 0, pl2: 0, pl3: 0, pl4: 3, iniciante: 6, fluente: 1 }, percurso: { avaliados: 10, pl1: 0, pl2: 0, pl3: 0, pl4: 1, iniciante: 7, fluente: 2 } },
+  { escola: "E.M.E.I.F. MANOEL VIEIRA GADI", turma: "ÚNICA", alunos: 14, entrada: { avaliados: 14, pl1: 3, pl2: 0, pl3: 2, pl4: 3, iniciante: 6, fluente: 0 }, percurso: { avaliados: 14, pl1: 0, pl2: 0, pl3: 3, pl4: 1, iniciante: 9, fluente: 1 } },
+  { escola: "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA", turma: "A", alunos: 26, entrada: null, percurso: { avaliados: 25, pl1: 0, pl2: 0, pl3: 0, pl4: 1, iniciante: 13, fluente: 11 } },
+  { escola: "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA", turma: "B", alunos: 25, entrada: null, percurso: { avaliados: 25, pl1: 0, pl2: 0, pl3: 1, pl4: 0, iniciante: 24, fluente: 0 } },
+  { escola: "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA", turma: "C", alunos: 26, entrada: null, percurso: { avaliados: 26, pl1: 2, pl2: 0, pl3: 1, pl4: 2, iniciante: 17, fluente: 4 } },
+  { escola: "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA", turma: "D", alunos: 22, entrada: null, percurso: { avaliados: 22, pl1: 1, pl2: 2, pl3: 1, pl4: 6, iniciante: 12, fluente: 0 } },
+  { escola: "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA", turma: "E", alunos: 20, entrada: null, percurso: { avaliados: 20, pl1: 2, pl2: 1, pl3: 8, pl4: 5, iniciante: 4, fluente: 0 } },
+  { escola: "E.M.E.I.F. PEDRO FRANCISCO DAS CHAGAS", turma: "ÚNICA", alunos: 25, entrada: { avaliados: 24, pl1: 1, pl2: 3, pl3: 3, pl4: 11, iniciante: 6, fluente: 0 }, percurso: { avaliados: 23, pl1: 0, pl2: 2, pl3: 0, pl4: 1, iniciante: 18, fluente: 2 } },
+  { escola: "E.M.E.I.F. POSSIDÔNIO GADI", turma: "ÚNICA", alunos: 13, entrada: { avaliados: 12, pl1: 0, pl2: 0, pl3: 0, pl4: 2, iniciante: 7, fluente: 3 }, percurso: { avaliados: 13, pl1: 0, pl2: 0, pl3: 0, pl4: 2, iniciante: 5, fluente: 6 } },
+  { escola: "E.M.E.I.F. SANTA ANA", turma: "ÚNICA", alunos: 16, entrada: { avaliados: 16, pl1: 1, pl2: 0, pl3: 0, pl4: 4, iniciante: 9, fluente: 2 }, percurso: { avaliados: 15, pl1: 0, pl2: 0, pl3: 2, pl4: 0, iniciante: 4, fluente: 9 } },
+  { escola: "E.M.E.I.F. SANTA HELENA", turma: "ÚNICA", alunos: 18, entrada: { avaliados: 17, pl1: 3, pl2: 0, pl3: 1, pl4: 8, iniciante: 5, fluente: 0 }, percurso: { avaliados: 17, pl1: 1, pl2: 1, pl3: 1, pl4: 4, iniciante: 9, fluente: 1 } },
+  { escola: "E.M.E.I.F. VEREADOR JOSÉ DOMINGOS DE BARROS", turma: "ÚNICA", alunos: 11, entrada: { avaliados: 11, pl1: 1, pl2: 2, pl3: 1, pl4: 5, iniciante: 2, fluente: 0 }, percurso: { avaliados: 11, pl1: 0, pl2: 0, pl3: 0, pl4: 6, iniciante: 3, fluente: 2 } },
+  { escola: "E.M.E.I.F. WELLINGTON PINTO FONTES", turma: "A", alunos: 17, entrada: null, percurso: { avaliados: 17, pl1: 0, pl2: 1, pl3: 0, pl4: 4, iniciante: 11, fluente: 1 } },
+  { escola: "E.M.E.I.F. WELLINGTON PINTO FONTES", turma: "B", alunos: 17, entrada: null, percurso: { avaliados: 17, pl1: 2, pl2: 0, pl3: 1, pl4: 1, iniciante: 12, fluente: 1 } },
+  { escola: "E.M.E.I.F. WELLINGTON PINTO FONTES", turma: "C", alunos: 15, entrada: null, percurso: { avaliados: 15, pl1: 2, pl2: 2, pl3: 1, pl4: 1, iniciante: 8, fluente: 1 } },
 ];
 
 const state = {
@@ -85,25 +85,29 @@ function nivelLabel(key) {
 }
 
 function shortSchool(name) {
-  return name
-    .replace("NOSSA S. DE FÁTIMA", "N. S. Fátima")
-    .replace("ELISABETHE J. M. BORGUERS", "Elisabethe Borguers")
-    .replace("WELLINGTON P. FONTES", "Wellington Fontes")
-    .replace("MANOEL LEANDRO PEREIRA", "Manoel L. Pereira")
-    .replace("AUDÁLIO MACIANO DA SILVA", "Audálio M. Silva")
-    .replace("ANTÔNIO A. DOS ANJOS", "Antônio dos Anjos")
-    .replace("ARISTIDES ANTÔNIO DA SILVA", "Aristides A. Silva")
-    .replace("CAPITULINO L. DE ARAÚJO", "Capitulino Araújo")
-    .replace("VEREADOR J. D. DE BARROS", "Vereador Barros")
-    .replace("BARÃO DE ALAGOAS", "Barão de Alagoas")
-    .replace("IMACULADA CONCEIÇÃO", "Imaculada Conceição")
-    .replace("JOÃO VIEIRA GOMES", "João V. Gomes")
-    .replace("JOSÉ ALVES DA SILVA", "José Alves Silva")
-    .replace("MANOEL VIEIRA GAD", "Manoel V. Gad")
-    .replace("MANOEL PEDRO DE MELO", "Manoel P. Melo")
-    .replace("PEDRO F. DAS CHAGAS", "Pedro das Chagas")
-    .replace("POSSIDÔNIO GADI", "Possidônio Gadi")
-    .replace("MANOEL BEZERRA LINTO", "Manoel B. Linto");
+  const map = {
+    "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA": "N. S. Fátima",
+    "E.M.E.I.F. ELISABETHE JACOBA MARIA BORGERS": "Elisabethe Borgers",
+    "E.M.E.I.F. WELLINGTON PINTO FONTES": "Wellington Fontes",
+    "E.M.E.I.F. MANOEL LEANDRO PEREIRA": "Manoel L. Pereira",
+    "E.M.E.I.F. AUDÁLIO MACIANO DA SILVA": "Audálio M. Silva",
+    "E.M.E.I.F. ANTÔNIO AGOSTINHO DOS ANJOS": "Antônio dos Anjos",
+    "E.M.E.I.F. ARISTIDES ANTÔNIO DA SILVA": "Aristides A. Silva",
+    "E.M.E.I.F. CAPITULINO LOURENÇO DE ARAÚJO": "Capitulino Araújo",
+    "E.M.E.I.F. VEREADOR JOSÉ DOMINGOS DE BARROS": "Vereador Barros",
+    "E.M.E.I.F. BARÃO DE ALAGOAS": "Barão de Alagoas",
+    "E.M.E.I.F. IMACULADA CONCEIÇÃO": "Imaculada Conceição",
+    "E.M.E.I.F. JOÃO VIEIRA GOMES": "João V. Gomes",
+    "E.M.E.I.F. JOSÉ ALVES DA SILVA": "José Alves Silva",
+    "E.M.E.I.F. MANOEL VIEIRA GADI": "Manoel V. Gadi",
+    "E.M.E.I.F. MANOEL PEDRO DE MELO": "Manoel P. Melo",
+    "E.M.E.I.F. PEDRO FRANCISCO DAS CHAGAS": "Pedro das Chagas",
+    "E.M.E.I.F. POSSIDÔNIO GADI": "Possidônio Gadi",
+    "E.M.E.I.F. MANOEL BEZERRA LINTO": "Manoel B. Linto",
+    "E.M.E.I.F. SANTA ANA": "Santa Ana",
+    "E.M.E.I.F. SANTA HELENA": "Santa Helena",
+  };
+  return map[name] || name;
 }
 
 function pct(part, total) {
@@ -211,7 +215,7 @@ function pillHtml(delta, invert = false) {
 function renderChips() {
   const box = document.getElementById("chips");
   const chips = [];
-  if (state.escola) chips.push(["escola", "Escola", shortSchool(state.escola)]);
+  if (state.escola) chips.push(["escola", "Escola", state.escola]);
   if (state.turma) chips.push(["turma", "Turma", state.turma]);
   if (state.nivel) chips.push(["nivel", "Nível", nivelLabel(state.nivel)]);
   if (state.search) chips.push(["search", "Busca", state.search]);
