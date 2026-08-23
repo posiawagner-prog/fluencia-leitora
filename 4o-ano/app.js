@@ -2580,11 +2580,9 @@ function fillSelects() {
 function syncSelects() {
   const anoSel = document.getElementById("filterAno");
   if (anoSel) {
+    anoSel.disabled = false;
+    anoSel.title = "";
     anoSel.value = state.ano;
-    if (ANO_PAGINA) {
-      anoSel.disabled = true;
-      anoSel.title = "Ano definido pela página atual";
-    }
   }
   const escolaSel = document.getElementById("filterEscola");
   const turmaSel = document.getElementById("filterTurma");
@@ -2609,16 +2607,23 @@ function applyPageYearUI() {
   document.querySelectorAll(".year-nav a[data-ano]").forEach((a) => {
     const ano = a.dataset.ano;
     a.href = yearPageUrl(ano).href;
-    a.classList.toggle("active", ANO_PAGINA && ano === ANO_PAGINA);
-    a.setAttribute("aria-current", ANO_PAGINA && ano === ANO_PAGINA ? "page" : "false");
+    a.classList.toggle("active", !!state.ano && ano === state.ano);
+    a.setAttribute("aria-current", state.ano && ano === state.ano ? "page" : "false");
   });
-  if (!ANO_PAGINA) return;
-  const label = anoLabel(ANO_PAGINA);
-  document.title = `Fluência Leitora · ${label}`;
+  const label = state.ano ? anoLabel(state.ano) : "2º · 3º · 4º · 5º anos";
+  document.title = state.ano
+    ? `Fluência Leitora · ${anoLabel(state.ano)}`
+    : "Fluência Leitora · 2º ao 5º ano";
   const spans = document.querySelectorAll(".hero-title span");
   if (spans[2]) spans[2].textContent = label;
-  const muted = document.querySelector(".table-toolbar .muted");
-  if (muted) muted.textContent = ` · dados da planilha · ${label}`;
+  const muted = document.querySelector(".table-toolbar .muted, .table-toolbar .muted, .muted");
+  const mutedEl = document.querySelector(".table-toolbar span.muted") ||
+    document.querySelector("#viewTable .muted");
+  if (mutedEl) {
+    mutedEl.textContent = state.ano
+      ? ` · dados da planilha · ${anoLabel(state.ano)}`
+      : " · dados unificados · 2º ao 5º ano";
+  }
 }
 
 function goToYear(ano, { push = true } = {}) {
@@ -2654,7 +2659,7 @@ function pillHtml(delta, invert = false) {
 function renderChips() {
   const box = document.getElementById("chips");
   const chips = [];
-  if (state.ano && !ANO_PAGINA) chips.push(["ano", "Ano", anoLabel(state.ano)]);
+  if (state.ano) chips.push(["ano", "Ano", anoLabel(state.ano)]);
   if (state.escola) chips.push(["escola", "Escola", state.escola]);
   if (state.turma) chips.push(["turma", "Turma", state.turma]);
   if (state.nivel) chips.push(["nivel", "Nível", nivelLabel(state.nivel)]);
@@ -3292,15 +3297,15 @@ function exportCsv(rows) {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = ANO_PAGINA
-    ? `fluencia-leitora-${ANO_PAGINA}o-ano.csv`
+  a.download = state.ano
+    ? `fluencia-leitora-${state.ano}o-ano.csv`
     : "fluencia-leitora-2-a-5-anos.csv";
   a.click();
   URL.revokeObjectURL(url);
 }
 
 function resetAll() {
-  state.ano = ANO_PAGINA || "";
+  state.ano = "";
   state.escola = "";
   state.turma = "";
   state.nivel = "";
@@ -3308,6 +3313,7 @@ function resetAll() {
   state.periodo = "percurso";
   state.page = 1;
   document.getElementById("searchInput").value = "";
+  applyPageYearUI();
   syncSelects();
   render();
 }
@@ -3351,10 +3357,17 @@ function bindEvents() {
   });
 
   document.getElementById("filterAno").addEventListener("change", (e) => {
-    state.ano = e.target.value;
+    const val = e.target.value;
+    if (/^[2-5]$/.test(val)) {
+      goToYear(val);
+      return;
+    }
+    // Todos os anos
+    state.ano = "";
     state.escola = "";
     state.turma = "";
     state.page = 1;
+    applyPageYearUI();
     syncSelects();
     render();
   });
@@ -3386,14 +3399,11 @@ function bindEvents() {
     const key = btn.dataset.clear;
     if (key === "all") return resetAll();
     if (key === "search") document.getElementById("searchInput").value = "";
-    if (key === "ano" && ANO_PAGINA) {
-      state.ano = ANO_PAGINA;
-    } else {
-      state[key] = "";
-    }
+    state[key] = "";
     if (key === "escola" || key === "ano") state.turma = "";
     if (key === "ano") state.escola = "";
     state.page = 1;
+    applyPageYearUI();
     syncSelects();
     render();
   });
