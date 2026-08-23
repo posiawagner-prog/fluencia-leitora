@@ -2969,7 +2969,7 @@ function renderDonut(rows) {
       datasets,
     },
     options: {
-      cutout: comparativo ? "42%" : "58%",
+      cutout: comparativo ? "38%" : "50%",
       maintainAspectRatio: false,
       onHover: (e, els) => { e.native.target.style.cursor = els.length ? "pointer" : "default"; },
       onClick: (_, els) => {
@@ -3104,7 +3104,9 @@ function renderEscolas(rows) {
 
   const wrap = document.getElementById("chartEscolasWrap");
   wrap.classList.toggle("comparativo", comparativo);
-  wrap.style.height = comparativo ? `${Math.max(520, items.length * 36)}px` : "";
+  wrap.style.height = comparativo
+    ? `${Math.max(520, items.length * 36)}px`
+    : `${Math.max(560, items.length * 40)}px`;
 
   const labels = items.map((i) => (drillTurmas ? i.label : shortSchool(i.label)));
   const niveisVisiveis = NIVEIS.filter((n) => matchesNivel(n.key));
@@ -3140,7 +3142,8 @@ function renderEscolas(rows) {
         backgroundColor: n.color,
         borderSkipped: false,
         borderRadius: 4,
-        barPercentage: 0.78,
+        barPercentage: 0.98,
+        categoryPercentage: 0.96,
         nivelKey: n.key,
       }));
 
@@ -3246,13 +3249,13 @@ function renderTable(rows) {
   document.getElementById("tableBody").innerHTML = pageRows.map((row) => {
     const bloco = blocoAtivo(row);
     const pred = predominante(bloco);
-    const cells = NIVEIS.map((n) => `<td>${bloco ? fmt(bloco[n.key]) : "—"}</td>`).join("");
+    const cells = NIVEIS.map((n) => `<td class="num">${bloco ? fmt(bloco[n.key]) : "—"}</td>`).join("");
     return `<tr class="clickable" data-ano="${row.ano}" data-escola="${row.escola}" data-turma="${row.turma}">
       <td>${anoLabel(row.ano)}</td>
       <td>${row.escola}</td>
       <td>${row.turma}</td>
-      <td>${fmt(row.alunos)}</td>
-      <td>${bloco ? fmt(bloco.avaliados) : "—"}</td>
+      <td class="num">${fmt(row.alunos)}</td>
+      <td class="num">${bloco ? fmt(bloco.avaliados) : "—"}</td>
       ${cells}
       <td>${pred ? `<span class="tag ${pred.key}">${pred.label}</span>` : `<span class="tag none">Sem dados</span>`}</td>
     </tr>`;
