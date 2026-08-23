@@ -548,7 +548,18 @@ html[data-theme="light"] .theme-switch-knob {
 .status-card:hover { transform: translateY(-2px); }
 .status-card.active { outline: 2px solid var(--text); }
 .status-card h3 { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.status-card h3 small { font-size: 11px; font-weight: 500; opacity: 0.7; }
 .status-card .num { font-size: 28px; font-weight: 700; letter-spacing: -0.04em; }
+.status-card .num-compare {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+.status-card .num-compare .ciclo-i { font-size: 22px; opacity: 0.72; }
+.status-card .num-compare .arrow { font-size: 16px; opacity: 0.45; font-weight: 500; }
 .status-card .sub { font-size: 12px; opacity: 0.8; margin-top: 4px; }
 
 .status-card.pl { background: var(--status-pl); }

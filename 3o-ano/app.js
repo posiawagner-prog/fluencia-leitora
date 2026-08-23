@@ -2432,6 +2432,55 @@ function sumLevels(bloco) {
   return NIVEIS.reduce((acc, n) => acc + (bloco[n.key] || 0), 0);
 }
 
+/** Redistribui totais de entrada colados numa só turma (como na planilha) pelas turmas da escola. */
+function distributeCounts(totals, weights) {
+  const sumW = weights.reduce((a, b) => a + b, 0) || 1;
+  const keys = Object.keys(totals);
+  const parts = weights.map(() => Object.fromEntries(keys.map((k) => [k, 0])));
+  keys.forEach((key) => {
+    const total = Number(totals[key] || 0);
+    const raw = weights.map((w) => (total * w) / sumW);
+    const floors = raw.map((v) => Math.floor(v));
+    let rest = total - floors.reduce((a, b) => a + b, 0);
+    const order = raw
+      .map((v, i) => ({ i, frac: v - floors[i] }))
+      .sort((a, b) => b.frac - a.frac);
+    floors.forEach((n, i) => { parts[i][key] = n; });
+    for (let i = 0; i < rest; i += 1) parts[order[i % order.length].i][key] += 1;
+  });
+  return parts;
+}
+
+function normalizeSchoolEntradaTotals() {
+  const groups = new Map();
+  DADOS.forEach((row) => {
+    const key = `${row.ano}||${row.escola}`;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(row);
+  });
+  groups.forEach((rows) => {
+    if (rows.length < 2) return;
+    const withEnt = rows.filter((r) => r.entrada && sumLevels(r.entrada) > 0);
+    if (withEnt.length !== 1) return;
+    const source = withEnt[0];
+    const sumAlunos = rows.reduce((acc, r) => acc + (r.alunos || 0), 0);
+    if ((source.entrada.avaliados || 0) <= (source.alunos || 0)) return;
+    if ((source.entrada.avaliados || 0) < sumAlunos * 0.8) return;
+    const weights = rows.map((r) => Math.max(0, r.alunos || 0));
+    const totals = Object.fromEntries(NIVEIS.map((n) => [n.key, source.entrada[n.key] || 0]));
+    const parts = distributeCounts(totals, weights);
+    rows.forEach((row, i) => {
+      const part = parts[i];
+      const avaliados = NIVEIS.reduce((acc, n) => acc + (part[n.key] || 0), 0);
+      row.entrada = avaliados
+        ? { avaliados, pl1: part.pl1, pl2: part.pl2, pl3: part.pl3, pl4: part.pl4, iniciante: part.iniciante, fluente: part.fluente }
+        : null;
+    });
+  });
+}
+
+normalizeSchoolEntradaTotals();
+
 function isComparativo() {
   return state.periodo === "comparativo";
 }
@@ -3195,21 +3244,30 @@ function renderEscolas(rows) {
 }
 
 function renderStatus(rows) {
-  const agg = aggregate(rows, periodoUnico());
+  const comparativo = isComparativo();
+  const entrada = aggregate(rows, "entrada");
+  const percurso = aggregate(rows, "percurso");
+  const agg = comparativo ? percurso : aggregate(rows, periodoUnico());
   const pre12 = agg.pl1 + agg.pl2;
   const pre34 = agg.pl3 + agg.pl4;
+  const pre12Ent = entrada.pl1 + entrada.pl2;
+  const pre34Ent = entrada.pl3 + entrada.pl4;
   const cards = [
-    { key: "pre12", cls: "pl", title: "Pré-leitores 1 e 2", num: pre12, sub: "Maior prioridade pedagógica" },
-    { key: "pre34", cls: "mid", title: "Pré-leitores 3 e 4", num: pre34, sub: "Em transição para a leitura" },
-    { key: "iniciante", cls: "ini", title: "Iniciantes", num: agg.iniciante, sub: "Leitura em consolidação" },
-    { key: "fluente", cls: "flu", title: "Fluentes", num: agg.fluente, sub: "Leitura consolidada" },
+    { key: "pre12", cls: "pl", title: "Pré-leitores 1 e 2", num: pre12, numEnt: pre12Ent, sub: "Maior prioridade pedagógica" },
+    { key: "pre34", cls: "mid", title: "Pré-leitores 3 e 4", num: pre34, numEnt: pre34Ent, sub: "Em transição para a leitura" },
+    { key: "iniciante", cls: "ini", title: "Iniciantes", num: agg.iniciante, numEnt: entrada.iniciante, sub: "Leitura em consolidação" },
+    { key: "fluente", cls: "flu", title: "Fluentes", num: agg.fluente, numEnt: entrada.fluente, sub: "Leitura consolidada" },
   ];
   document.getElementById("statusRow").innerHTML = cards.map((c) => {
     const active = state.nivel === c.key || (state.nivel === "pre" && c.key.startsWith("pre"));
+    const body = comparativo
+      ? `<div class="num num-compare"><span class="ciclo-i">${fmt(c.numEnt)}</span><span class="arrow" aria-hidden="true">→</span><span>${fmt(c.num)}</span></div>
+      <div class="sub">Ciclo I ${fmtPct(pct(c.numEnt, entrada.avaliados))} · Ciclo II ${fmtPct(pct(c.num, agg.avaliados))} · ${c.sub}</div>`
+      : `<div class="num">${fmt(c.num)}</div>
+      <div class="sub">${c.sub} · ${fmtPct(pct(c.num, agg.avaliados))}</div>`;
     return `<article class="status-card ${c.cls}${active ? " active" : ""}" data-nivel="${c.key}">
-      <h3>${c.title}</h3>
-      <div class="num">${fmt(c.num)}</div>
-      <div class="sub">${c.sub} · ${fmtPct(pct(c.num, agg.avaliados))}</div>
+      <h3>${c.title}${comparativo ? ` <small>Ciclo I → II</small>` : ""}</h3>
+      ${body}
     </article>`;
   }).join("");
 }
