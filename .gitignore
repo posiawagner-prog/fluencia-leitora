@@ -1,7 +1,7 @@
 *.xlsx
 *.png
 !assets/*.png
-!2o-ano/assets/*.png
+!*o-ano/assets/*.png
 CRM panel UX_UI design.png
 IMG_6725.PNG
 IMG_6726.PNG
