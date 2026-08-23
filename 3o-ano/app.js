@@ -2396,14 +2396,16 @@ const NIVEIS = [
 
 const PRE_KEYS = ["pl1", "pl2", "pl3", "pl4"];
 
-/** Ano fixo pela pasta da URL (/2o-ano/, /3o-ano/, …) ou window.__ANO_PAGINA__ */
-const ANO_PAGINA = (function () {
+function detectAnoPagina() {
   if (typeof window !== "undefined" && window.__ANO_PAGINA__) {
     return String(window.__ANO_PAGINA__);
   }
   const m = (typeof location !== "undefined" ? location.pathname : "").match(/\/([2-5])o-ano\/?/i);
   return m ? m[1] : "";
-})();
+}
+
+/** Ano fixo pela pasta da URL (/2o-ano/, /3o-ano/, …) — atualizado ao clicar na navegação */
+let ANO_PAGINA = detectAnoPagina();
 
 const state = {
   view: "dashboard",
@@ -2599,9 +2601,16 @@ function syncSelects() {
   document.getElementById("filterPeriodo").value = state.periodo;
 }
 
+function yearPageUrl(ano) {
+  return new URL(`../${ano}o-ano/`, location.href);
+}
+
 function applyPageYearUI() {
   document.querySelectorAll(".year-nav a[data-ano]").forEach((a) => {
-    a.classList.toggle("active", ANO_PAGINA && a.dataset.ano === ANO_PAGINA);
+    const ano = a.dataset.ano;
+    a.href = yearPageUrl(ano).href;
+    a.classList.toggle("active", ANO_PAGINA && ano === ANO_PAGINA);
+    a.setAttribute("aria-current", ANO_PAGINA && ano === ANO_PAGINA ? "page" : "false");
   });
   if (!ANO_PAGINA) return;
   const label = anoLabel(ANO_PAGINA);
@@ -2610,6 +2619,28 @@ function applyPageYearUI() {
   if (spans[2]) spans[2].textContent = label;
   const muted = document.querySelector(".table-toolbar .muted");
   if (muted) muted.textContent = ` · dados da planilha · ${label}`;
+}
+
+function goToYear(ano, { push = true } = {}) {
+  const next = String(ano || "");
+  if (!/^[2-5]$/.test(next)) return;
+  if (next === ANO_PAGINA && state.ano === next) return;
+
+  ANO_PAGINA = next;
+  window.__ANO_PAGINA__ = next;
+  state.ano = next;
+  state.escola = "";
+  state.turma = "";
+  state.page = 1;
+
+  const url = yearPageUrl(next);
+  const path = `${url.pathname}${url.search}${url.hash}`;
+  if (push) history.pushState({ ano: next }, "", path);
+  else history.replaceState({ ano: next }, "", path);
+
+  applyPageYearUI();
+  syncSelects();
+  render();
 }
 
 function pillHtml(delta, invert = false) {
@@ -3298,6 +3329,27 @@ function bindEvents() {
   });
   document.getElementById("btnResetAll").addEventListener("click", resetAll);
   document.getElementById("btnTheme").addEventListener("click", toggleTheme);
+
+  document.querySelectorAll(".year-nav a[data-ano]").forEach((a) => {
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      goToYear(a.dataset.ano);
+    });
+  });
+  window.addEventListener("popstate", (e) => {
+    const ano = (e.state && e.state.ano) || detectAnoPagina();
+    if (!ano) return;
+    ANO_PAGINA = String(ano);
+    window.__ANO_PAGINA__ = ANO_PAGINA;
+    state.ano = ANO_PAGINA;
+    state.escola = "";
+    state.turma = "";
+    state.page = 1;
+    applyPageYearUI();
+    syncSelects();
+    render();
+  });
+
   document.getElementById("filterAno").addEventListener("change", (e) => {
     state.ano = e.target.value;
     state.escola = "";
