@@ -1,3 +1,2390 @@
+const DADOS = [
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. ANTÔNIO AGOSTINHO DOS ANJOS",
+        "turma":  "ÚNICA",
+        "alunos":  19,
+        "entrada":  {
+                        "avaliados":  19,
+                        "pl1":  2,
+                        "pl2":  2,
+                        "pl3":  0,
+                        "pl4":  3,
+                        "iniciante":  12,
+                        "fluente":  0
+                    },
+        "percurso":  {
+                         "avaliados":  18,
+                         "pl1":  0,
+                         "pl2":  1,
+                         "pl3":  1,
+                         "pl4":  2,
+                         "iniciante":  14,
+                         "fluente":  0
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. ARISTIDES ANTÔNIO DA SILVA",
+        "turma":  "ÚNICA",
+        "alunos":  9,
+        "entrada":  {
+                        "avaliados":  7,
+                        "pl1":  0,
+                        "pl2":  0,
+                        "pl3":  2,
+                        "pl4":  1,
+                        "iniciante":  4,
+                        "fluente":  0
+                    },
+        "percurso":  {
+                         "avaliados":  12,
+                         "pl1":  1,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  4,
+                         "iniciante":  6,
+                         "fluente":  1
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. AUDÁLIO MACIANO DA SILVA",
+        "turma":  "ÚNICA",
+        "alunos":  13,
+        "entrada":  {
+                        "avaliados":  12,
+                        "pl1":  0,
+                        "pl2":  1,
+                        "pl3":  2,
+                        "pl4":  6,
+                        "iniciante":  3,
+                        "fluente":  0
+                    },
+        "percurso":  {
+                         "avaliados":  12,
+                         "pl1":  1,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  4,
+                         "iniciante":  6,
+                         "fluente":  1
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. BARÃO DE ALAGOAS",
+        "turma":  "ÚNICA",
+        "alunos":  20,
+        "entrada":  {
+                        "avaliados":  19,
+                        "pl1":  0,
+                        "pl2":  2,
+                        "pl3":  3,
+                        "pl4":  5,
+                        "iniciante":  7,
+                        "fluente":  2
+                    },
+        "percurso":  {
+                         "avaliados":  19,
+                         "pl1":  0,
+                         "pl2":  2,
+                         "pl3":  0,
+                         "pl4":  2,
+                         "iniciante":  11,
+                         "fluente":  4
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. CAPITULINO LOURENÇO DE ARAÚJO",
+        "turma":  "ÚNICA",
+        "alunos":  17,
+        "entrada":  {
+                        "avaliados":  17,
+                        "pl1":  0,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  4,
+                        "iniciante":  12,
+                        "fluente":  1
+                    },
+        "percurso":  {
+                         "avaliados":  17,
+                         "pl1":  0,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  1,
+                         "iniciante":  13,
+                         "fluente":  3
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. ELISABETHE JACOBA MARIA BORGERS",
+        "turma":  "A",
+        "alunos":  16,
+        "entrada":  {
+                        "avaliados":  32,
+                        "pl1":  8,
+                        "pl2":  3,
+                        "pl3":  1,
+                        "pl4":  9,
+                        "iniciante":  10,
+                        "fluente":  1
+                    },
+        "percurso":  {
+                         "avaliados":  16,
+                         "pl1":  0,
+                         "pl2":  2,
+                         "pl3":  0,
+                         "pl4":  5,
+                         "iniciante":  8,
+                         "fluente":  1
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. ELISABETHE JACOBA MARIA BORGERS",
+        "turma":  "B",
+        "alunos":  19,
+        "entrada":  null,
+        "percurso":  {
+                         "avaliados":  14,
+                         "pl1":  0,
+                         "pl2":  4,
+                         "pl3":  0,
+                         "pl4":  1,
+                         "iniciante":  9,
+                         "fluente":  0
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. IMACULADA CONCEIÇÃO",
+        "turma":  "ÚNICA",
+        "alunos":  23,
+        "entrada":  {
+                        "avaliados":  25,
+                        "pl1":  4,
+                        "pl2":  0,
+                        "pl3":  2,
+                        "pl4":  10,
+                        "iniciante":  9,
+                        "fluente":  0
+                    },
+        "percurso":  {
+                         "avaliados":  23,
+                         "pl1":  3,
+                         "pl2":  1,
+                         "pl3":  0,
+                         "pl4":  5,
+                         "iniciante":  14,
+                         "fluente":  0
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. JOÃO VIEIRA GOMES",
+        "turma":  "ÚNICA",
+        "alunos":  18,
+        "entrada":  {
+                        "avaliados":  16,
+                        "pl1":  1,
+                        "pl2":  1,
+                        "pl3":  2,
+                        "pl4":  6,
+                        "iniciante":  6,
+                        "fluente":  0
+                    },
+        "percurso":  {
+                         "avaliados":  15,
+                         "pl1":  0,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  7,
+                         "iniciante":  8,
+                         "fluente":  0
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. JOSÉ ALVES DA SILVA",
+        "turma":  "ÚNICA",
+        "alunos":  18,
+        "entrada":  {
+                        "avaliados":  18,
+                        "pl1":  2,
+                        "pl2":  0,
+                        "pl3":  2,
+                        "pl4":  5,
+                        "iniciante":  9,
+                        "fluente":  0
+                    },
+        "percurso":  {
+                         "avaliados":  16,
+                         "pl1":  1,
+                         "pl2":  0,
+                         "pl3":  6,
+                         "pl4":  0,
+                         "iniciante":  7,
+                         "fluente":  2
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. MANOEL BEZERRA LINTO",
+        "turma":  "ÚNICA",
+        "alunos":  12,
+        "entrada":  {
+                        "avaliados":  12,
+                        "pl1":  1,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  6,
+                        "iniciante":  4,
+                        "fluente":  1
+                    },
+        "percurso":  {
+                         "avaliados":  6,
+                         "pl1":  0,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0,
+                         "iniciante":  6,
+                         "fluente":  0
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. MANOEL LEANDRO PEREIRA",
+        "turma":  "A",
+        "alunos":  17,
+        "entrada":  {
+                        "avaliados":  30,
+                        "pl1":  0,
+                        "pl2":  1,
+                        "pl3":  2,
+                        "pl4":  14,
+                        "iniciante":  13,
+                        "fluente":  0
+                    },
+        "percurso":  {
+                         "avaliados":  17,
+                         "pl1":  0,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0,
+                         "iniciante":  17,
+                         "fluente":  0
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. MANOEL LEANDRO PEREIRA",
+        "turma":  "B",
+        "alunos":  13,
+        "entrada":  null,
+        "percurso":  {
+                         "avaliados":  13,
+                         "pl1":  0,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  2,
+                         "iniciante":  11,
+                         "fluente":  0
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. MANOEL PEDRO DE MELO",
+        "turma":  "ÚNICA",
+        "alunos":  10,
+        "entrada":  {
+                        "avaliados":  10,
+                        "pl1":  0,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  3,
+                        "iniciante":  6,
+                        "fluente":  1
+                    },
+        "percurso":  {
+                         "avaliados":  10,
+                         "pl1":  0,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  1,
+                         "iniciante":  7,
+                         "fluente":  2
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. MANOEL VIEIRA GADI",
+        "turma":  "ÚNICA",
+        "alunos":  14,
+        "entrada":  {
+                        "avaliados":  14,
+                        "pl1":  3,
+                        "pl2":  0,
+                        "pl3":  2,
+                        "pl4":  3,
+                        "iniciante":  6,
+                        "fluente":  0
+                    },
+        "percurso":  {
+                         "avaliados":  14,
+                         "pl1":  0,
+                         "pl2":  0,
+                         "pl3":  3,
+                         "pl4":  1,
+                         "iniciante":  9,
+                         "fluente":  1
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA",
+        "turma":  "A",
+        "alunos":  26,
+        "entrada":  {
+                        "avaliados":  118,
+                        "pl1":  8,
+                        "pl2":  1,
+                        "pl3":  16,
+                        "pl4":  26,
+                        "iniciante":  56,
+                        "fluente":  11
+                    },
+        "percurso":  {
+                         "avaliados":  25,
+                         "pl1":  0,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  1,
+                         "iniciante":  13,
+                         "fluente":  11
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA",
+        "turma":  "B",
+        "alunos":  25,
+        "entrada":  null,
+        "percurso":  {
+                         "avaliados":  25,
+                         "pl1":  0,
+                         "pl2":  0,
+                         "pl3":  1,
+                         "pl4":  0,
+                         "iniciante":  24,
+                         "fluente":  0
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA",
+        "turma":  "C",
+        "alunos":  26,
+        "entrada":  null,
+        "percurso":  {
+                         "avaliados":  26,
+                         "pl1":  2,
+                         "pl2":  0,
+                         "pl3":  1,
+                         "pl4":  2,
+                         "iniciante":  17,
+                         "fluente":  4
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA",
+        "turma":  "D",
+        "alunos":  22,
+        "entrada":  null,
+        "percurso":  {
+                         "avaliados":  22,
+                         "pl1":  1,
+                         "pl2":  2,
+                         "pl3":  1,
+                         "pl4":  6,
+                         "iniciante":  12,
+                         "fluente":  0
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA",
+        "turma":  "E",
+        "alunos":  20,
+        "entrada":  null,
+        "percurso":  {
+                         "avaliados":  20,
+                         "pl1":  2,
+                         "pl2":  1,
+                         "pl3":  8,
+                         "pl4":  5,
+                         "iniciante":  4,
+                         "fluente":  0
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. PEDRO FRANCISCO DAS CHAGAS",
+        "turma":  "ÚNICA",
+        "alunos":  25,
+        "entrada":  {
+                        "avaliados":  24,
+                        "pl1":  1,
+                        "pl2":  3,
+                        "pl3":  3,
+                        "pl4":  11,
+                        "iniciante":  6,
+                        "fluente":  0
+                    },
+        "percurso":  {
+                         "avaliados":  23,
+                         "pl1":  0,
+                         "pl2":  2,
+                         "pl3":  0,
+                         "pl4":  1,
+                         "iniciante":  18,
+                         "fluente":  2
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. POSSIDÔNIO GADI",
+        "turma":  "ÚNICA",
+        "alunos":  13,
+        "entrada":  {
+                        "avaliados":  12,
+                        "pl1":  0,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  2,
+                        "iniciante":  7,
+                        "fluente":  3
+                    },
+        "percurso":  {
+                         "avaliados":  13,
+                         "pl1":  0,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  2,
+                         "iniciante":  5,
+                         "fluente":  6
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. SANTA ANA",
+        "turma":  "ÚNICA",
+        "alunos":  16,
+        "entrada":  {
+                        "avaliados":  16,
+                        "pl1":  1,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  4,
+                        "iniciante":  9,
+                        "fluente":  2
+                    },
+        "percurso":  {
+                         "avaliados":  15,
+                         "pl1":  0,
+                         "pl2":  0,
+                         "pl3":  2,
+                         "pl4":  0,
+                         "iniciante":  4,
+                         "fluente":  9
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. SANTA HELENA",
+        "turma":  "ÚNICA",
+        "alunos":  18,
+        "entrada":  {
+                        "avaliados":  17,
+                        "pl1":  3,
+                        "pl2":  0,
+                        "pl3":  1,
+                        "pl4":  8,
+                        "iniciante":  5,
+                        "fluente":  0
+                    },
+        "percurso":  {
+                         "avaliados":  17,
+                         "pl1":  1,
+                         "pl2":  1,
+                         "pl3":  1,
+                         "pl4":  4,
+                         "iniciante":  9,
+                         "fluente":  1
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. VEREADOR JOSÉ DOMINGOS DE BARROS",
+        "turma":  "ÚNICA",
+        "alunos":  11,
+        "entrada":  {
+                        "avaliados":  11,
+                        "pl1":  1,
+                        "pl2":  2,
+                        "pl3":  1,
+                        "pl4":  5,
+                        "iniciante":  2,
+                        "fluente":  0
+                    },
+        "percurso":  {
+                         "avaliados":  11,
+                         "pl1":  0,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  6,
+                         "iniciante":  3,
+                         "fluente":  2
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. WELLINGTON PINTO FONTES",
+        "turma":  "A",
+        "alunos":  17,
+        "entrada":  {
+                        "avaliados":  46,
+                        "pl1":  4,
+                        "pl2":  3,
+                        "pl3":  1,
+                        "pl4":  15,
+                        "iniciante":  19,
+                        "fluente":  4
+                    },
+        "percurso":  {
+                         "avaliados":  17,
+                         "pl1":  0,
+                         "pl2":  1,
+                         "pl3":  0,
+                         "pl4":  4,
+                         "iniciante":  11,
+                         "fluente":  1
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. WELLINGTON PINTO FONTES",
+        "turma":  "B",
+        "alunos":  17,
+        "entrada":  null,
+        "percurso":  {
+                         "avaliados":  17,
+                         "pl1":  2,
+                         "pl2":  0,
+                         "pl3":  1,
+                         "pl4":  1,
+                         "iniciante":  12,
+                         "fluente":  1
+                     }
+    },
+    {
+        "ano":  "2",
+        "escola":  "E.M.E.I.F. WELLINGTON PINTO FONTES",
+        "turma":  "C",
+        "alunos":  15,
+        "entrada":  null,
+        "percurso":  {
+                         "avaliados":  15,
+                         "pl1":  2,
+                         "pl2":  2,
+                         "pl3":  1,
+                         "pl4":  1,
+                         "iniciante":  8,
+                         "fluente":  1
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. ANTÔNIO AGOSTINHO DOS ANJOS",
+        "turma":  "ÚNICA",
+        "alunos":  25,
+        "entrada":  {
+                        "avaliados":  25,
+                        "iniciante":  13,
+                        "pl1":  1,
+                        "fluente":  5,
+                        "pl2":  3,
+                        "pl3":  3,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  24,
+                         "iniciante":  11,
+                         "pl1":  3,
+                         "fluente":  9,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  1
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. ARISTIDES ANTÔNIO DA SILVA",
+        "turma":  "ÚNICA",
+        "alunos":  4,
+        "entrada":  {
+                        "avaliados":  4,
+                        "iniciante":  1,
+                        "pl1":  0,
+                        "fluente":  0,
+                        "pl2":  1,
+                        "pl3":  0,
+                        "pl4":  2
+                    },
+        "percurso":  {
+                         "avaliados":  4,
+                         "iniciante":  3,
+                         "pl1":  0,
+                         "fluente":  1,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. AUDÁLIO MACIANO DA SILVA",
+        "turma":  "ÚNICA",
+        "alunos":  20,
+        "entrada":  {
+                        "avaliados":  20,
+                        "iniciante":  7,
+                        "pl1":  3,
+                        "fluente":  4,
+                        "pl2":  1,
+                        "pl3":  1,
+                        "pl4":  4
+                    },
+        "percurso":  {
+                         "avaliados":  20,
+                         "iniciante":  8,
+                         "pl1":  0,
+                         "fluente":  7,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  5
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. BARÃO DE ALAGOAS",
+        "turma":  "ÚNICA",
+        "alunos":  22,
+        "entrada":  {
+                        "avaliados":  22,
+                        "iniciante":  9,
+                        "pl1":  0,
+                        "fluente":  10,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  3
+                    },
+        "percurso":  {
+                         "avaliados":  21,
+                         "iniciante":  10,
+                         "pl1":  0,
+                         "fluente":  10,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  1
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. CAPITULINO LOURENÇO DE ARAÚJO",
+        "turma":  "ÚNICA",
+        "alunos":  29,
+        "entrada":  null,
+        "percurso":  {
+                         "avaliados":  29,
+                         "iniciante":  20,
+                         "pl1":  0,
+                         "fluente":  7,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  2
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. ELISABETHE JACOBA MARIA BORGERS",
+        "turma":  "A",
+        "alunos":  19,
+        "entrada":  {
+                        "avaliados":  17,
+                        "iniciante":  6,
+                        "pl1":  2,
+                        "fluente":  6,
+                        "pl2":  0,
+                        "pl3":  1,
+                        "pl4":  2
+                    },
+        "percurso":  {
+                         "avaliados":  18,
+                         "iniciante":  7,
+                         "pl1":  3,
+                         "fluente":  8,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. ELISABETHE JACOBA MARIA BORGERS",
+        "turma":  "B",
+        "alunos":  17,
+        "entrada":  {
+                        "avaliados":  17,
+                        "iniciante":  11,
+                        "pl1":  3,
+                        "fluente":  0,
+                        "pl2":  0,
+                        "pl3":  1,
+                        "pl4":  2
+                    },
+        "percurso":  {
+                         "avaliados":  15,
+                         "iniciante":  12,
+                         "pl1":  0,
+                         "fluente":  0,
+                         "pl2":  0,
+                         "pl3":  2,
+                         "pl4":  1
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. IMACULADA CONCEIÇÃO",
+        "turma":  "ÚNICA",
+        "alunos":  21,
+        "entrada":  {
+                        "avaliados":  20,
+                        "iniciante":  12,
+                        "pl1":  0,
+                        "fluente":  2,
+                        "pl2":  3,
+                        "pl3":  2,
+                        "pl4":  1
+                    },
+        "percurso":  {
+                         "avaliados":  21,
+                         "iniciante":  15,
+                         "pl1":  0,
+                         "fluente":  2,
+                         "pl2":  0,
+                         "pl3":  1,
+                         "pl4":  3
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. JOÃO VIEIRA GOMES",
+        "turma":  "ÚNICA",
+        "alunos":  17,
+        "entrada":  {
+                        "avaliados":  15,
+                        "iniciante":  7,
+                        "pl1":  2,
+                        "fluente":  2,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  4
+                    },
+        "percurso":  {
+                         "avaliados":  16,
+                         "iniciante":  7,
+                         "pl1":  2,
+                         "fluente":  5,
+                         "pl2":  0,
+                         "pl3":  2,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. JOSÉ ALVES DA SILVA",
+        "turma":  "ÚNICA",
+        "alunos":  26,
+        "entrada":  {
+                        "avaliados":  25,
+                        "iniciante":  20,
+                        "pl1":  0,
+                        "fluente":  3,
+                        "pl2":  1,
+                        "pl3":  0,
+                        "pl4":  1
+                    },
+        "percurso":  {
+                         "avaliados":  25,
+                         "iniciante":  17,
+                         "pl1":  1,
+                         "fluente":  6,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  1
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. MANOEL BEZERRA LINTO",
+        "turma":  "ÚNICA",
+        "alunos":  18,
+        "entrada":  {
+                        "avaliados":  17,
+                        "iniciante":  13,
+                        "pl1":  0,
+                        "fluente":  3,
+                        "pl2":  0,
+                        "pl3":  1,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  16,
+                         "iniciante":  8,
+                         "pl1":  0,
+                         "fluente":  8,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. MANOEL LEANDRO PEREIRA",
+        "turma":  "ÚNICA",
+        "alunos":  12,
+        "entrada":  {
+                        "avaliados":  12,
+                        "iniciante":  8,
+                        "pl1":  0,
+                        "fluente":  2,
+                        "pl2":  0,
+                        "pl3":  1,
+                        "pl4":  1
+                    },
+        "percurso":  {
+                         "avaliados":  11,
+                         "iniciante":  6,
+                         "pl1":  0,
+                         "fluente":  2,
+                         "pl2":  0,
+                         "pl3":  2,
+                         "pl4":  1
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. MANOEL PEDRO DE MELO",
+        "turma":  "ÚNICA",
+        "alunos":  3,
+        "entrada":  null,
+        "percurso":  {
+                         "avaliados":  3,
+                         "iniciante":  3,
+                         "pl1":  0,
+                         "fluente":  0,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. MANOEL VIEIRA GADI",
+        "turma":  "ÚNICA",
+        "alunos":  14,
+        "entrada":  {
+                        "avaliados":  13,
+                        "iniciante":  9,
+                        "pl1":  2,
+                        "fluente":  1,
+                        "pl2":  0,
+                        "pl3":  1,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  12,
+                         "iniciante":  8,
+                         "pl1":  1,
+                         "fluente":  1,
+                         "pl2":  0,
+                         "pl3":  1,
+                         "pl4":  1
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA",
+        "turma":  "A",
+        "alunos":  33,
+        "entrada":  {
+                        "avaliados":  33,
+                        "iniciante":  30,
+                        "pl1":  0,
+                        "fluente":  0,
+                        "pl2":  1,
+                        "pl3":  1,
+                        "pl4":  1
+                    },
+        "percurso":  {
+                         "avaliados":  33,
+                         "iniciante":  27,
+                         "pl1":  0,
+                         "fluente":  2,
+                         "pl2":  0,
+                         "pl3":  2,
+                         "pl4":  2
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA",
+        "turma":  "B",
+        "alunos":  34,
+        "entrada":  {
+                        "avaliados":  34,
+                        "iniciante":  24,
+                        "pl1":  0,
+                        "fluente":  8,
+                        "pl2":  2,
+                        "pl3":  0,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  34,
+                         "iniciante":  21,
+                         "pl1":  0,
+                         "fluente":  11,
+                         "pl2":  2,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA",
+        "turma":  "C",
+        "alunos":  33,
+        "entrada":  {
+                        "avaliados":  33,
+                        "iniciante":  25,
+                        "pl1":  2,
+                        "fluente":  3,
+                        "pl2":  0,
+                        "pl3":  3,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  33,
+                         "iniciante":  29,
+                         "pl1":  0,
+                         "fluente":  2,
+                         "pl2":  2,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA",
+        "turma":  "D",
+        "alunos":  21,
+        "entrada":  {
+                        "avaliados":  21,
+                        "iniciante":  3,
+                        "pl1":  0,
+                        "fluente":  0,
+                        "pl2":  6,
+                        "pl3":  6,
+                        "pl4":  6
+                    },
+        "percurso":  {
+                         "avaliados":  20,
+                         "iniciante":  8,
+                         "pl1":  3,
+                         "fluente":  0,
+                         "pl2":  1,
+                         "pl3":  0,
+                         "pl4":  8
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. PEDRO FRANCISCO DAS CHAGAS",
+        "turma":  "ÚNICA",
+        "alunos":  32,
+        "entrada":  {
+                        "avaliados":  31,
+                        "iniciante":  22,
+                        "pl1":  1,
+                        "fluente":  5,
+                        "pl2":  2,
+                        "pl3":  0,
+                        "pl4":  1
+                    },
+        "percurso":  {
+                         "avaliados":  28,
+                         "iniciante":  19,
+                         "pl1":  2,
+                         "fluente":  4,
+                         "pl2":  1,
+                         "pl3":  0,
+                         "pl4":  2
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. POSSIDÔNIO GADI",
+        "turma":  "ÚNICA",
+        "alunos":  8,
+        "entrada":  {
+                        "avaliados":  8,
+                        "iniciante":  2,
+                        "pl1":  0,
+                        "fluente":  5,
+                        "pl2":  0,
+                        "pl3":  1,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  8,
+                         "iniciante":  2,
+                         "pl1":  0,
+                         "fluente":  6,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. SANTA ANA",
+        "turma":  "ÚNICA",
+        "alunos":  19,
+        "entrada":  {
+                        "avaliados":  19,
+                        "iniciante":  6,
+                        "pl1":  3,
+                        "fluente":  5,
+                        "pl2":  1,
+                        "pl3":  3,
+                        "pl4":  1
+                    },
+        "percurso":  {
+                         "avaliados":  18,
+                         "iniciante":  6,
+                         "pl1":  0,
+                         "fluente":  7,
+                         "pl2":  0,
+                         "pl3":  3,
+                         "pl4":  2
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. SANTA HELENA",
+        "turma":  "ÚNICA",
+        "alunos":  13,
+        "entrada":  {
+                        "avaliados":  13,
+                        "iniciante":  7,
+                        "pl1":  1,
+                        "fluente":  0,
+                        "pl2":  1,
+                        "pl3":  3,
+                        "pl4":  1
+                    },
+        "percurso":  {
+                         "avaliados":  12,
+                         "iniciante":  9,
+                         "pl1":  0,
+                         "fluente":  0,
+                         "pl2":  0,
+                         "pl3":  3,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. VEREADOR JOSÉ DOMINGOS DE BARROS",
+        "turma":  "ÚNICA",
+        "alunos":  6,
+        "entrada":  {
+                        "avaliados":  6,
+                        "iniciante":  4,
+                        "pl1":  0,
+                        "fluente":  0,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  2
+                    },
+        "percurso":  {
+                         "avaliados":  6,
+                         "iniciante":  5,
+                         "pl1":  0,
+                         "fluente":  1,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. WELLINGTON PINTO FONTES",
+        "turma":  "A",
+        "alunos":  27,
+        "entrada":  {
+                        "avaliados":  27,
+                        "iniciante":  20,
+                        "pl1":  1,
+                        "fluente":  3,
+                        "pl2":  2,
+                        "pl3":  0,
+                        "pl4":  1
+                    },
+        "percurso":  {
+                         "avaliados":  26,
+                         "iniciante":  18,
+                         "pl1":  0,
+                         "fluente":  6,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  2
+                     }
+    },
+    {
+        "ano":  "3",
+        "escola":  "E.M.E.I.F. WELLINGTON PINTO FONTES",
+        "turma":  "B",
+        "alunos":  24,
+        "entrada":  {
+                        "avaliados":  24,
+                        "iniciante":  7,
+                        "pl1":  2,
+                        "fluente":  2,
+                        "pl2":  2,
+                        "pl3":  10,
+                        "pl4":  1
+                    },
+        "percurso":  {
+                         "avaliados":  23,
+                         "iniciante":  7,
+                         "pl1":  2,
+                         "fluente":  3,
+                         "pl2":  0,
+                         "pl3":  6,
+                         "pl4":  5
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. ANTÔNIO AGOSTINHO DOS ANJOS",
+        "turma":  "ÚNICA",
+        "alunos":  27,
+        "entrada":  {
+                        "avaliados":  27,
+                        "iniciante":  20,
+                        "pl1":  2,
+                        "fluente":  0,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  5
+                    },
+        "percurso":  {
+                         "avaliados":  26,
+                         "iniciante":  8,
+                         "pl1":  0,
+                         "fluente":  15,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  3
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. ARISTIDES ANTÔNIO DA SILVA",
+        "turma":  "ÚNICA",
+        "alunos":  10,
+        "entrada":  {
+                        "avaliados":  10,
+                        "iniciante":  5,
+                        "pl1":  2,
+                        "fluente":  1,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  2
+                    },
+        "percurso":  {
+                         "avaliados":  10,
+                         "iniciante":  1,
+                         "pl1":  3,
+                         "fluente":  5,
+                         "pl2":  1,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. AUDÁLIO MACIANO DA SILVA",
+        "turma":  "ÚNICA",
+        "alunos":  16,
+        "entrada":  {
+                        "avaliados":  15,
+                        "iniciante":  8,
+                        "pl1":  1,
+                        "fluente":  0,
+                        "pl2":  0,
+                        "pl3":  1,
+                        "pl4":  5
+                    },
+        "percurso":  {
+                         "avaliados":  17,
+                         "iniciante":  15,
+                         "pl1":  2,
+                         "fluente":  0,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. BARÃO DE ALAGOAS",
+        "turma":  "ÚNICA",
+        "alunos":  19,
+        "entrada":  {
+                        "avaliados":  19,
+                        "iniciante":  5,
+                        "pl1":  2,
+                        "fluente":  9,
+                        "pl2":  1,
+                        "pl3":  2,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  19,
+                         "iniciante":  6,
+                         "pl1":  0,
+                         "fluente":  10,
+                         "pl2":  1,
+                         "pl3":  0,
+                         "pl4":  2
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. CAPITULINO LOURENÇO DE ARAÚJO",
+        "turma":  "ÚNICA",
+        "alunos":  14,
+        "entrada":  null,
+        "percurso":  {
+                         "avaliados":  13,
+                         "iniciante":  4,
+                         "pl1":  0,
+                         "fluente":  9,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. ELISABETHE JACOBA MARIA BORGERS",
+        "turma":  "A",
+        "alunos":  30,
+        "entrada":  {
+                        "avaliados":  30,
+                        "iniciante":  18,
+                        "pl1":  0,
+                        "fluente":  9,
+                        "pl2":  0,
+                        "pl3":  1,
+                        "pl4":  2
+                    },
+        "percurso":  {
+                         "avaliados":  30,
+                         "iniciante":  7,
+                         "pl1":  0,
+                         "fluente":  23,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. ELISABETHE JACOBA MARIA BORGERS",
+        "turma":  "B",
+        "alunos":  19,
+        "entrada":  {
+                        "avaliados":  14,
+                        "iniciante":  1,
+                        "pl1":  1,
+                        "fluente":  0,
+                        "pl2":  2,
+                        "pl3":  2,
+                        "pl4":  8
+                    },
+        "percurso":  {
+                         "avaliados":  19,
+                         "iniciante":  6,
+                         "pl1":  5,
+                         "fluente":  1,
+                         "pl2":  0,
+                         "pl3":  1,
+                         "pl4":  6
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. IMACULADA CONCEIÇÃO",
+        "turma":  "ÚNICA",
+        "alunos":  21,
+        "entrada":  {
+                        "avaliados":  20,
+                        "iniciante":  4,
+                        "pl1":  0,
+                        "fluente":  12,
+                        "pl2":  0,
+                        "pl3":  3,
+                        "pl4":  1
+                    },
+        "percurso":  {
+                         "avaliados":  22,
+                         "iniciante":  3,
+                         "pl1":  0,
+                         "fluente":  15,
+                         "pl2":  0,
+                         "pl3":  3,
+                         "pl4":  1
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. JOÃO VIEIRA GOMES",
+        "turma":  "ÚNICA",
+        "alunos":  14,
+        "entrada":  {
+                        "avaliados":  11,
+                        "iniciante":  4,
+                        "pl1":  0,
+                        "fluente":  4,
+                        "pl2":  1,
+                        "pl3":  2,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  14,
+                         "iniciante":  6,
+                         "pl1":  1,
+                         "fluente":  5,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  2
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. JOSÉ ALVES DA SILVA",
+        "turma":  "ÚNICA",
+        "alunos":  19,
+        "entrada":  {
+                        "avaliados":  19,
+                        "iniciante":  3,
+                        "pl1":  0,
+                        "fluente":  14,
+                        "pl2":  0,
+                        "pl3":  1,
+                        "pl4":  1
+                    },
+        "percurso":  {
+                         "avaliados":  19,
+                         "iniciante":  3,
+                         "pl1":  0,
+                         "fluente":  14,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  2
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. MANOEL BEZERRA LINTO",
+        "turma":  "ÚNICA",
+        "alunos":  8,
+        "entrada":  {
+                        "avaliados":  8,
+                        "iniciante":  4,
+                        "pl1":  1,
+                        "fluente":  2,
+                        "pl2":  0,
+                        "pl3":  1,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  8,
+                         "iniciante":  6,
+                         "pl1":  0,
+                         "fluente":  1,
+                         "pl2":  0,
+                         "pl3":  1,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. MANOEL LEANDRO PEREIRA",
+        "turma":  "ÚNICA",
+        "alunos":  13,
+        "entrada":  {
+                        "avaliados":  13,
+                        "iniciante":  4,
+                        "pl1":  0,
+                        "fluente":  7,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  2
+                    },
+        "percurso":  {
+                         "avaliados":  13,
+                         "iniciante":  5,
+                         "pl1":  0,
+                         "fluente":  7,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  1
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. MANOEL PEDRO DE MELO",
+        "turma":  "ÚNICA",
+        "alunos":  7,
+        "entrada":  null,
+        "percurso":  {
+                         "avaliados":  7,
+                         "iniciante":  1,
+                         "pl1":  1,
+                         "fluente":  5,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. MANOEL VIEIRA GADI",
+        "turma":  "ÚNICA",
+        "alunos":  17,
+        "entrada":  {
+                        "avaliados":  16,
+                        "iniciante":  10,
+                        "pl1":  2,
+                        "fluente":  0,
+                        "pl2":  0,
+                        "pl3":  3,
+                        "pl4":  1
+                    },
+        "percurso":  {
+                         "avaliados":  16,
+                         "iniciante":  5,
+                         "pl1":  0,
+                         "fluente":  7,
+                         "pl2":  0,
+                         "pl3":  2,
+                         "pl4":  2
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA",
+        "turma":  "A",
+        "alunos":  34,
+        "entrada":  {
+                        "avaliados":  34,
+                        "iniciante":  0,
+                        "pl1":  0,
+                        "fluente":  34,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  34,
+                         "iniciante":  0,
+                         "pl1":  0,
+                         "fluente":  34,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA",
+        "turma":  "B",
+        "alunos":  33,
+        "entrada":  {
+                        "avaliados":  33,
+                        "iniciante":  17,
+                        "pl1":  0,
+                        "fluente":  13,
+                        "pl2":  0,
+                        "pl3":  1,
+                        "pl4":  2
+                    },
+        "percurso":  {
+                         "avaliados":  33,
+                         "iniciante":  10,
+                         "pl1":  0,
+                         "fluente":  23,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA",
+        "turma":  "C",
+        "alunos":  29,
+        "entrada":  {
+                        "avaliados":  29,
+                        "iniciante":  11,
+                        "pl1":  1,
+                        "fluente":  4,
+                        "pl2":  1,
+                        "pl3":  4,
+                        "pl4":  8
+                    },
+        "percurso":  {
+                         "avaliados":  30,
+                         "iniciante":  18,
+                         "pl1":  2,
+                         "fluente":  10,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. PEDRO FRANCISCO DAS CHAGAS",
+        "turma":  "A",
+        "alunos":  20,
+        "entrada":  {
+                        "avaliados":  20,
+                        "iniciante":  11,
+                        "pl1":  0,
+                        "fluente":  9,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  20,
+                         "iniciante":  11,
+                         "pl1":  0,
+                         "fluente":  9,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. PEDRO FRANCISCO DAS CHAGAS",
+        "turma":  "B",
+        "alunos":  19,
+        "entrada":  {
+                        "avaliados":  19,
+                        "iniciante":  7,
+                        "pl1":  0,
+                        "fluente":  0,
+                        "pl2":  8,
+                        "pl3":  1,
+                        "pl4":  3
+                    },
+        "percurso":  {
+                         "avaliados":  19,
+                         "iniciante":  9,
+                         "pl1":  0,
+                         "fluente":  0,
+                         "pl2":  3,
+                         "pl3":  3,
+                         "pl4":  4
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. POSSIDÔNIO GADI",
+        "turma":  "ÚNICA",
+        "alunos":  14,
+        "entrada":  {
+                        "avaliados":  14,
+                        "iniciante":  7,
+                        "pl1":  1,
+                        "fluente":  5,
+                        "pl2":  0,
+                        "pl3":  1,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  14,
+                         "iniciante":  6,
+                         "pl1":  0,
+                         "fluente":  6,
+                         "pl2":  0,
+                         "pl3":  2,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. SANTA ANA",
+        "turma":  "ÚNICA",
+        "alunos":  10,
+        "entrada":  {
+                        "avaliados":  10,
+                        "iniciante":  2,
+                        "pl1":  0,
+                        "fluente":  6,
+                        "pl2":  1,
+                        "pl3":  0,
+                        "pl4":  1
+                    },
+        "percurso":  {
+                         "avaliados":  9,
+                         "iniciante":  2,
+                         "pl1":  0,
+                         "fluente":  6,
+                         "pl2":  1,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. SANTA HELENA",
+        "turma":  "ÚNICA",
+        "alunos":  18,
+        "entrada":  {
+                        "avaliados":  18,
+                        "iniciante":  11,
+                        "pl1":  0,
+                        "fluente":  6,
+                        "pl2":  0,
+                        "pl3":  1,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  18,
+                         "iniciante":  6,
+                         "pl1":  0,
+                         "fluente":  12,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. VEREADOR JOSÉ DOMINGOS DE BARROS",
+        "turma":  "ÚNICA",
+        "alunos":  15,
+        "entrada":  {
+                        "avaliados":  14,
+                        "iniciante":  5,
+                        "pl1":  1,
+                        "fluente":  6,
+                        "pl2":  0,
+                        "pl3":  1,
+                        "pl4":  1
+                    },
+        "percurso":  {
+                         "avaliados":  14,
+                         "iniciante":  6,
+                         "pl1":  1,
+                         "fluente":  7,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. WELLINGTON PINTO FONTES",
+        "turma":  "A",
+        "alunos":  22,
+        "entrada":  {
+                        "avaliados":  22,
+                        "iniciante":  3,
+                        "pl1":  0,
+                        "fluente":  16,
+                        "pl2":  2,
+                        "pl3":  1,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  21,
+                         "iniciante":  1,
+                         "pl1":  2,
+                         "fluente":  18,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. WELLINGTON PINTO FONTES",
+        "turma":  "B",
+        "alunos":  20,
+        "entrada":  {
+                        "avaliados":  20,
+                        "iniciante":  5,
+                        "pl1":  1,
+                        "fluente":  10,
+                        "pl2":  0,
+                        "pl3":  4,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  19,
+                         "iniciante":  4,
+                         "pl1":  2,
+                         "fluente":  12,
+                         "pl2":  0,
+                         "pl3":  1,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "4",
+        "escola":  "E.M.E.I.F. WELLINGTON PINTO FONTES",
+        "turma":  "C",
+        "alunos":  21,
+        "entrada":  {
+                        "avaliados":  21,
+                        "iniciante":  5,
+                        "pl1":  2,
+                        "fluente":  10,
+                        "pl2":  1,
+                        "pl3":  1,
+                        "pl4":  2
+                    },
+        "percurso":  {
+                         "avaliados":  20,
+                         "iniciante":  3,
+                         "pl1":  3,
+                         "fluente":  12,
+                         "pl2":  0,
+                         "pl3":  1,
+                         "pl4":  1
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. ANTÔNIO AGOSTINHO DOS ANJOS",
+        "turma":  "ÚNICA",
+        "alunos":  27,
+        "entrada":  {
+                        "avaliados":  27,
+                        "iniciante":  17,
+                        "pl1":  4,
+                        "fluente":  0,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  6
+                    },
+        "percurso":  {
+                         "avaliados":  26,
+                         "iniciante":  5,
+                         "pl1":  1,
+                         "fluente":  17,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  3
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. ARISTIDES ANTÔNIO DA SILVA",
+        "turma":  "ÚNICA",
+        "alunos":  7,
+        "entrada":  {
+                        "avaliados":  7,
+                        "iniciante":  3,
+                        "pl1":  0,
+                        "fluente":  1,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  3
+                    },
+        "percurso":  {
+                         "avaliados":  6,
+                         "iniciante":  3,
+                         "pl1":  0,
+                         "fluente":  1,
+                         "pl2":  2,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. AUDÁLIO MACIANO DA SILVA",
+        "turma":  "ÚNICA",
+        "alunos":  18,
+        "entrada":  {
+                        "avaliados":  18,
+                        "iniciante":  5,
+                        "pl1":  1,
+                        "fluente":  10,
+                        "pl2":  2,
+                        "pl3":  0,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  19,
+                         "iniciante":  2,
+                         "pl1":  0,
+                         "fluente":  14,
+                         "pl2":  1,
+                         "pl3":  2,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. BARÃO DE ALAGOAS",
+        "turma":  "ÚNICA",
+        "alunos":  21,
+        "entrada":  {
+                        "avaliados":  21,
+                        "iniciante":  6,
+                        "pl1":  0,
+                        "fluente":  12,
+                        "pl2":  0,
+                        "pl3":  1,
+                        "pl4":  2
+                    },
+        "percurso":  {
+                         "avaliados":  21,
+                         "iniciante":  7,
+                         "pl1":  0,
+                         "fluente":  14,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. CAPITULINO LOURENÇO DE ARAÚJO",
+        "turma":  "ÚNICA",
+        "alunos":  13,
+        "entrada":  null,
+        "percurso":  {
+                         "avaliados":  13,
+                         "iniciante":  5,
+                         "pl1":  0,
+                         "fluente":  7,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  1
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. ELISABETHE JACOBA MARIA BORGERS",
+        "turma":  "A",
+        "alunos":  26,
+        "entrada":  {
+                        "avaliados":  24,
+                        "iniciante":  9,
+                        "pl1":  1,
+                        "fluente":  0,
+                        "pl2":  3,
+                        "pl3":  4,
+                        "pl4":  7
+                    },
+        "percurso":  {
+                         "avaliados":  25,
+                         "iniciante":  7,
+                         "pl1":  0,
+                         "fluente":  16,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  2
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. ELISABETHE JACOBA MARIA BORGERS",
+        "turma":  "B",
+        "alunos":  22,
+        "entrada":  {
+                        "avaliados":  22,
+                        "iniciante":  6,
+                        "pl1":  1,
+                        "fluente":  15,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  20,
+                         "iniciante":  2,
+                         "pl1":  0,
+                         "fluente":  17,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  1
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. IMACULADA CONCEIÇÃO",
+        "turma":  "ÚNICA",
+        "alunos":  23,
+        "entrada":  {
+                        "avaliados":  23,
+                        "iniciante":  7,
+                        "pl1":  0,
+                        "fluente":  13,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  3
+                    },
+        "percurso":  {
+                         "avaliados":  22,
+                         "iniciante":  5,
+                         "pl1":  0,
+                         "fluente":  15,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  2
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. JOÃO VIEIRA GOMES",
+        "turma":  "ÚNICA",
+        "alunos":  18,
+        "entrada":  {
+                        "avaliados":  15,
+                        "iniciante":  6,
+                        "pl1":  0,
+                        "fluente":  7,
+                        "pl2":  0,
+                        "pl3":  1,
+                        "pl4":  1
+                    },
+        "percurso":  {
+                         "avaliados":  17,
+                         "iniciante":  6,
+                         "pl1":  1,
+                         "fluente":  8,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  2
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. JOSÉ ALVES DA SILVA",
+        "turma":  "ÚNICA",
+        "alunos":  16,
+        "entrada":  {
+                        "avaliados":  16,
+                        "iniciante":  5,
+                        "pl1":  0,
+                        "fluente":  8,
+                        "pl2":  1,
+                        "pl3":  1,
+                        "pl4":  1
+                    },
+        "percurso":  {
+                         "avaliados":  16,
+                         "iniciante":  2,
+                         "pl1":  1,
+                         "fluente":  11,
+                         "pl2":  0,
+                         "pl3":  1,
+                         "pl4":  1
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. MANOEL BEZERRA LINTO",
+        "turma":  "ÚNICA",
+        "alunos":  15,
+        "entrada":  {
+                        "avaliados":  15,
+                        "iniciante":  8,
+                        "pl1":  1,
+                        "fluente":  3,
+                        "pl2":  0,
+                        "pl3":  3,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  15,
+                         "iniciante":  6,
+                         "pl1":  0,
+                         "fluente":  5,
+                         "pl2":  0,
+                         "pl3":  1,
+                         "pl4":  3
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. MANOEL LEANDRO PEREIRA",
+        "turma":  "ÚNICA",
+        "alunos":  18,
+        "entrada":  {
+                        "avaliados":  18,
+                        "iniciante":  9,
+                        "pl1":  0,
+                        "fluente":  8,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  1
+                    },
+        "percurso":  {
+                         "avaliados":  16,
+                         "iniciante":  7,
+                         "pl1":  0,
+                         "fluente":  8,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  1
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. MANOEL PEDRO DE MELO",
+        "turma":  "ÚNICA",
+        "alunos":  6,
+        "entrada":  null,
+        "percurso":  {
+                         "avaliados":  5,
+                         "iniciante":  2,
+                         "pl1":  0,
+                         "fluente":  3,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. MANOEL VIEIRA GADI",
+        "turma":  "ÚNICA",
+        "alunos":  12,
+        "entrada":  {
+                        "avaliados":  12,
+                        "iniciante":  10,
+                        "pl1":  0,
+                        "fluente":  2,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  13,
+                         "iniciante":  8,
+                         "pl1":  0,
+                         "fluente":  5,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA",
+        "turma":  "A",
+        "alunos":  32,
+        "entrada":  {
+                        "avaliados":  32,
+                        "iniciante":  1,
+                        "pl1":  0,
+                        "fluente":  31,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  32,
+                         "iniciante":  3,
+                         "pl1":  0,
+                         "fluente":  28,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  1
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA",
+        "turma":  "B",
+        "alunos":  31,
+        "entrada":  {
+                        "avaliados":  31,
+                        "iniciante":  4,
+                        "pl1":  0,
+                        "fluente":  27,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  31,
+                         "iniciante":  2,
+                         "pl1":  0,
+                         "fluente":  28,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  1
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA",
+        "turma":  "C",
+        "alunos":  29,
+        "entrada":  {
+                        "avaliados":  29,
+                        "iniciante":  14,
+                        "pl1":  1,
+                        "fluente":  12,
+                        "pl2":  0,
+                        "pl3":  2,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  28,
+                         "iniciante":  13,
+                         "pl1":  0,
+                         "fluente":  14,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  1
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA",
+        "turma":  "D",
+        "alunos":  18,
+        "entrada":  {
+                        "avaliados":  18,
+                        "iniciante":  10,
+                        "pl1":  1,
+                        "fluente":  4,
+                        "pl2":  2,
+                        "pl3":  1,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  18,
+                         "iniciante":  7,
+                         "pl1":  0,
+                         "fluente":  8,
+                         "pl2":  0,
+                         "pl3":  2,
+                         "pl4":  1
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. PEDRO FRANCISCO DAS CHAGAS",
+        "turma":  "ÚNICA",
+        "alunos":  30,
+        "entrada":  {
+                        "avaliados":  28,
+                        "iniciante":  13,
+                        "pl1":  2,
+                        "fluente":  5,
+                        "pl2":  1,
+                        "pl3":  4,
+                        "pl4":  3
+                    },
+        "percurso":  {
+                         "avaliados":  28,
+                         "iniciante":  18,
+                         "pl1":  1,
+                         "fluente":  6,
+                         "pl2":  0,
+                         "pl3":  1,
+                         "pl4":  2
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. POSSIDÔNIO GADI",
+        "turma":  "ÚNICA",
+        "alunos":  12,
+        "entrada":  {
+                        "avaliados":  11,
+                        "iniciante":  2,
+                        "pl1":  0,
+                        "fluente":  8,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  1
+                    },
+        "percurso":  {
+                         "avaliados":  11,
+                         "iniciante":  2,
+                         "pl1":  0,
+                         "fluente":  8,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  1
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. SANTA ANA",
+        "turma":  "ÚNICA",
+        "alunos":  16,
+        "entrada":  {
+                        "avaliados":  16,
+                        "iniciante":  2,
+                        "pl1":  0,
+                        "fluente":  14,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  17,
+                         "iniciante":  1,
+                         "pl1":  0,
+                         "fluente":  16,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. SANTA HELENA",
+        "turma":  "ÚNICA",
+        "alunos":  15,
+        "entrada":  {
+                        "avaliados":  15,
+                        "iniciante":  7,
+                        "pl1":  0,
+                        "fluente":  4,
+                        "pl2":  0,
+                        "pl3":  3,
+                        "pl4":  1
+                    },
+        "percurso":  {
+                         "avaliados":  15,
+                         "iniciante":  9,
+                         "pl1":  0,
+                         "fluente":  6,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. VEREADOR JOSÉ DOMINGOS DE BARROS",
+        "turma":  "ÚNICA",
+        "alunos":  15,
+        "entrada":  {
+                        "avaliados":  15,
+                        "iniciante":  3,
+                        "pl1":  0,
+                        "fluente":  12,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  15,
+                         "iniciante":  5,
+                         "pl1":  0,
+                         "fluente":  10,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. WELLINGTON PINTO FONTES",
+        "turma":  "A",
+        "alunos":  20,
+        "entrada":  {
+                        "avaliados":  20,
+                        "iniciante":  9,
+                        "pl1":  0,
+                        "fluente":  11,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  0
+                    },
+        "percurso":  {
+                         "avaliados":  20,
+                         "iniciante":  7,
+                         "pl1":  0,
+                         "fluente":  13,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    },
+    {
+        "ano":  "5",
+        "escola":  "E.M.E.I.F. WELLINGTON PINTO FONTES",
+        "turma":  "B",
+        "alunos":  22,
+        "entrada":  {
+                        "avaliados":  22,
+                        "iniciante":  9,
+                        "pl1":  1,
+                        "fluente":  11,
+                        "pl2":  0,
+                        "pl3":  0,
+                        "pl4":  1
+                    },
+        "percurso":  {
+                         "avaliados":  23,
+                         "iniciante":  5,
+                         "pl1":  2,
+                         "fluente":  16,
+                         "pl2":  0,
+                         "pl3":  0,
+                         "pl4":  0
+                     }
+    }
+];
+
 const NIVEIS = [
   { key: "pl1", label: "Pré-leitor 1", short: "PL1", color: "#FF3B30" },
   { key: "pl2", label: "Pré-leitor 2", short: "PL2", color: "#FF9500" },
@@ -9,39 +2396,9 @@ const NIVEIS = [
 
 const PRE_KEYS = ["pl1", "pl2", "pl3", "pl4"];
 
-const DADOS = [
-  { escola: "E.M.E.I.F. ANTÔNIO AGOSTINHO DOS ANJOS", turma: "ÚNICA", alunos: 19, entrada: { avaliados: 19, pl1: 2, pl2: 2, pl3: 0, pl4: 3, iniciante: 12, fluente: 0 }, percurso: { avaliados: 18, pl1: 0, pl2: 1, pl3: 1, pl4: 2, iniciante: 14, fluente: 0 } },
-  { escola: "E.M.E.I.F. ARISTIDES ANTÔNIO DA SILVA", turma: "ÚNICA", alunos: 9, entrada: { avaliados: 7, pl1: 0, pl2: 0, pl3: 2, pl4: 1, iniciante: 4, fluente: 0 }, percurso: { avaliados: 12, pl1: 1, pl2: 0, pl3: 0, pl4: 4, iniciante: 6, fluente: 1 } },
-  { escola: "E.M.E.I.F. AUDÁLIO MACIANO DA SILVA", turma: "ÚNICA", alunos: 13, entrada: { avaliados: 12, pl1: 0, pl2: 1, pl3: 2, pl4: 6, iniciante: 3, fluente: 0 }, percurso: { avaliados: 12, pl1: 1, pl2: 0, pl3: 0, pl4: 4, iniciante: 6, fluente: 1 } },
-  { escola: "E.M.E.I.F. BARÃO DE ALAGOAS", turma: "ÚNICA", alunos: 20, entrada: { avaliados: 19, pl1: 0, pl2: 2, pl3: 3, pl4: 5, iniciante: 7, fluente: 2 }, percurso: { avaliados: 19, pl1: 0, pl2: 2, pl3: 0, pl4: 2, iniciante: 11, fluente: 4 } },
-  { escola: "E.M.E.I.F. CAPITULINO LOURENÇO DE ARAÚJO", turma: "ÚNICA", alunos: 17, entrada: { avaliados: 17, pl1: 0, pl2: 0, pl3: 0, pl4: 4, iniciante: 12, fluente: 1 }, percurso: { avaliados: 17, pl1: 0, pl2: 0, pl3: 0, pl4: 1, iniciante: 13, fluente: 3 } },
-  { escola: "E.M.E.I.F. ELISABETHE JACOBA MARIA BORGERS", turma: "A", alunos: 16, entrada: { avaliados: 32, pl1: 8, pl2: 3, pl3: 1, pl4: 9, iniciante: 10, fluente: 1 }, percurso: { avaliados: 16, pl1: 0, pl2: 2, pl3: 0, pl4: 5, iniciante: 8, fluente: 1 } },
-  { escola: "E.M.E.I.F. ELISABETHE JACOBA MARIA BORGERS", turma: "B", alunos: 19, entrada: null, percurso: { avaliados: 14, pl1: 0, pl2: 4, pl3: 0, pl4: 1, iniciante: 9, fluente: 0 } },
-  { escola: "E.M.E.I.F. IMACULADA CONCEIÇÃO", turma: "ÚNICA", alunos: 23, entrada: { avaliados: 25, pl1: 4, pl2: 0, pl3: 2, pl4: 10, iniciante: 9, fluente: 0 }, percurso: { avaliados: 23, pl1: 3, pl2: 1, pl3: 0, pl4: 5, iniciante: 14, fluente: 0 } },
-  { escola: "E.M.E.I.F. JOÃO VIEIRA GOMES", turma: "ÚNICA", alunos: 18, entrada: { avaliados: 16, pl1: 1, pl2: 1, pl3: 2, pl4: 6, iniciante: 6, fluente: 0 }, percurso: { avaliados: 15, pl1: 0, pl2: 0, pl3: 0, pl4: 7, iniciante: 8, fluente: 0 } },
-  { escola: "E.M.E.I.F. JOSÉ ALVES DA SILVA", turma: "ÚNICA", alunos: 18, entrada: { avaliados: 18, pl1: 2, pl2: 0, pl3: 2, pl4: 5, iniciante: 9, fluente: 0 }, percurso: { avaliados: 16, pl1: 1, pl2: 0, pl3: 6, pl4: 0, iniciante: 7, fluente: 2 } },
-  { escola: "E.M.E.I.F. MANOEL BEZERRA LINTO", turma: "ÚNICA", alunos: 12, entrada: { avaliados: 12, pl1: 1, pl2: 0, pl3: 0, pl4: 6, iniciante: 4, fluente: 1 }, percurso: { avaliados: 6, pl1: 0, pl2: 0, pl3: 0, pl4: 0, iniciante: 6, fluente: 0 } },
-  { escola: "E.M.E.I.F. MANOEL LEANDRO PEREIRA", turma: "A", alunos: 17, entrada: { avaliados: 30, pl1: 0, pl2: 1, pl3: 2, pl4: 14, iniciante: 13, fluente: 0 }, percurso: { avaliados: 17, pl1: 0, pl2: 0, pl3: 0, pl4: 0, iniciante: 17, fluente: 0 } },
-  { escola: "E.M.E.I.F. MANOEL LEANDRO PEREIRA", turma: "B", alunos: 13, entrada: null, percurso: { avaliados: 13, pl1: 0, pl2: 0, pl3: 0, pl4: 2, iniciante: 11, fluente: 0 } },
-  { escola: "E.M.E.I.F. MANOEL PEDRO DE MELO", turma: "ÚNICA", alunos: 10, entrada: { avaliados: 10, pl1: 0, pl2: 0, pl3: 0, pl4: 3, iniciante: 6, fluente: 1 }, percurso: { avaliados: 10, pl1: 0, pl2: 0, pl3: 0, pl4: 1, iniciante: 7, fluente: 2 } },
-  { escola: "E.M.E.I.F. MANOEL VIEIRA GADI", turma: "ÚNICA", alunos: 14, entrada: { avaliados: 14, pl1: 3, pl2: 0, pl3: 2, pl4: 3, iniciante: 6, fluente: 0 }, percurso: { avaliados: 14, pl1: 0, pl2: 0, pl3: 3, pl4: 1, iniciante: 9, fluente: 1 } },
-  { escola: "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA", turma: "A", alunos: 26, entrada: { avaliados: 118, pl1: 8, pl2: 1, pl3: 16, pl4: 26, iniciante: 56, fluente: 11 }, percurso: { avaliados: 25, pl1: 0, pl2: 0, pl3: 0, pl4: 1, iniciante: 13, fluente: 11 } },
-  { escola: "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA", turma: "B", alunos: 25, entrada: null, percurso: { avaliados: 25, pl1: 0, pl2: 0, pl3: 1, pl4: 0, iniciante: 24, fluente: 0 } },
-  { escola: "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA", turma: "C", alunos: 26, entrada: null, percurso: { avaliados: 26, pl1: 2, pl2: 0, pl3: 1, pl4: 2, iniciante: 17, fluente: 4 } },
-  { escola: "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA", turma: "D", alunos: 22, entrada: null, percurso: { avaliados: 22, pl1: 1, pl2: 2, pl3: 1, pl4: 6, iniciante: 12, fluente: 0 } },
-  { escola: "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA", turma: "E", alunos: 20, entrada: null, percurso: { avaliados: 20, pl1: 2, pl2: 1, pl3: 8, pl4: 5, iniciante: 4, fluente: 0 } },
-  { escola: "E.M.E.I.F. PEDRO FRANCISCO DAS CHAGAS", turma: "ÚNICA", alunos: 25, entrada: { avaliados: 24, pl1: 1, pl2: 3, pl3: 3, pl4: 11, iniciante: 6, fluente: 0 }, percurso: { avaliados: 23, pl1: 0, pl2: 2, pl3: 0, pl4: 1, iniciante: 18, fluente: 2 } },
-  { escola: "E.M.E.I.F. POSSIDÔNIO GADI", turma: "ÚNICA", alunos: 13, entrada: { avaliados: 12, pl1: 0, pl2: 0, pl3: 0, pl4: 2, iniciante: 7, fluente: 3 }, percurso: { avaliados: 13, pl1: 0, pl2: 0, pl3: 0, pl4: 2, iniciante: 5, fluente: 6 } },
-  { escola: "E.M.E.I.F. SANTA ANA", turma: "ÚNICA", alunos: 16, entrada: { avaliados: 16, pl1: 1, pl2: 0, pl3: 0, pl4: 4, iniciante: 9, fluente: 2 }, percurso: { avaliados: 15, pl1: 0, pl2: 0, pl3: 2, pl4: 0, iniciante: 4, fluente: 9 } },
-  { escola: "E.M.E.I.F. SANTA HELENA", turma: "ÚNICA", alunos: 18, entrada: { avaliados: 17, pl1: 3, pl2: 0, pl3: 1, pl4: 8, iniciante: 5, fluente: 0 }, percurso: { avaliados: 17, pl1: 1, pl2: 1, pl3: 1, pl4: 4, iniciante: 9, fluente: 1 } },
-  { escola: "E.M.E.I.F. VEREADOR JOSÉ DOMINGOS DE BARROS", turma: "ÚNICA", alunos: 11, entrada: { avaliados: 11, pl1: 1, pl2: 2, pl3: 1, pl4: 5, iniciante: 2, fluente: 0 }, percurso: { avaliados: 11, pl1: 0, pl2: 0, pl3: 0, pl4: 6, iniciante: 3, fluente: 2 } },
-  { escola: "E.M.E.I.F. WELLINGTON PINTO FONTES", turma: "A", alunos: 17, entrada: { avaliados: 46, pl1: 4, pl2: 3, pl3: 1, pl4: 15, iniciante: 19, fluente: 4 }, percurso: { avaliados: 17, pl1: 0, pl2: 1, pl3: 0, pl4: 4, iniciante: 11, fluente: 1 } },
-  { escola: "E.M.E.I.F. WELLINGTON PINTO FONTES", turma: "B", alunos: 17, entrada: null, percurso: { avaliados: 17, pl1: 2, pl2: 0, pl3: 1, pl4: 1, iniciante: 12, fluente: 1 } },
-  { escola: "E.M.E.I.F. WELLINGTON PINTO FONTES", turma: "C", alunos: 15, entrada: null, percurso: { avaliados: 15, pl1: 2, pl2: 2, pl3: 1, pl4: 1, iniciante: 8, fluente: 1 } },
-];
-
 const state = {
   view: "dashboard",
+  ano: "",
   escola: "",
   turma: "",
   periodo: "percurso",
@@ -49,7 +2406,7 @@ const state = {
   search: "",
   page: 1,
   pageSize: 10,
-  sort: { key: "escola", dir: 1 },
+  sort: { key: "ano", dir: 1 },
 };
 
 const charts = {};
@@ -92,30 +2449,35 @@ function nivelLabel(key) {
   return NIVEIS.find((n) => n.key === key)?.label || key;
 }
 
+function anoLabel(ano) {
+  if (!ano) return "Todos os anos";
+  return `${ano}º ano`;
+}
+
 function shortSchool(name) {
   const map = {
-    "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA": "N. S. Fátima",
-    "E.M.E.I.F. ELISABETHE JACOBA MARIA BORGERS": "Elisabethe Borgers",
-    "E.M.E.I.F. WELLINGTON PINTO FONTES": "Wellington Fontes",
-    "E.M.E.I.F. MANOEL LEANDRO PEREIRA": "Manoel L. Pereira",
-    "E.M.E.I.F. AUDÁLIO MACIANO DA SILVA": "Audálio M. Silva",
     "E.M.E.I.F. ANTÔNIO AGOSTINHO DOS ANJOS": "Antônio dos Anjos",
     "E.M.E.I.F. ARISTIDES ANTÔNIO DA SILVA": "Aristides A. Silva",
-    "E.M.E.I.F. CAPITULINO LOURENÇO DE ARAÚJO": "Capitulino Araújo",
-    "E.M.E.I.F. VEREADOR JOSÉ DOMINGOS DE BARROS": "Vereador Barros",
+    "E.M.E.I.F. AUDÁLIO MACIANO DA SILVA": "Audálio M. Silva",
     "E.M.E.I.F. BARÃO DE ALAGOAS": "Barão de Alagoas",
+    "E.M.E.I.F. CAPITULINO LOURENÇO DE ARAÚJO": "Capitulino Araújo",
+    "E.M.E.I.F. ELISABETHE JACOBA MARIA BORGERS": "Elisabethe Borgers",
     "E.M.E.I.F. IMACULADA CONCEIÇÃO": "Imaculada Conceição",
     "E.M.E.I.F. JOÃO VIEIRA GOMES": "João V. Gomes",
     "E.M.E.I.F. JOSÉ ALVES DA SILVA": "José Alves Silva",
-    "E.M.E.I.F. MANOEL VIEIRA GADI": "Manoel V. Gadi",
+    "E.M.E.I.F. MANOEL BEZERRA LINTO": "Manoel B. Linto",
+    "E.M.E.I.F. MANOEL LEANDRO PEREIRA": "Manoel L. Pereira",
     "E.M.E.I.F. MANOEL PEDRO DE MELO": "Manoel P. Melo",
+    "E.M.E.I.F. MANOEL VIEIRA GADI": "Manoel V. Gadi",
+    "E.M.E.I.F. NOSSA SENHORA DE FÁTIMA": "N. S. Fátima",
     "E.M.E.I.F. PEDRO FRANCISCO DAS CHAGAS": "Pedro das Chagas",
     "E.M.E.I.F. POSSIDÔNIO GADI": "Possidônio Gadi",
-    "E.M.E.I.F. MANOEL BEZERRA LINTO": "Manoel B. Linto",
     "E.M.E.I.F. SANTA ANA": "Santa Ana",
     "E.M.E.I.F. SANTA HELENA": "Santa Helena",
+    "E.M.E.I.F. VEREADOR JOSÉ DOMINGOS DE BARROS": "Vereador Barros",
+    "E.M.E.I.F. WELLINGTON PINTO FONTES": "Wellington Fontes",
   };
-  return map[name] || name;
+  return map[name] || name.replace(/^E\.M\.E\.I\.F\.\s+/i, "").replace(/^EMEIF\s+/i, "");
 }
 
 function pct(part, total) {
@@ -134,9 +2496,10 @@ function fmtPct(n) {
 function rowsBase() {
   const q = state.search.trim().toLowerCase();
   return DADOS.filter((row) => {
+    if (state.ano && String(row.ano) !== String(state.ano)) return false;
     if (state.escola && row.escola !== state.escola) return false;
     if (state.turma && row.turma !== state.turma) return false;
-    if (q && !`${row.escola} ${row.turma}`.toLowerCase().includes(q)) return false;
+    if (q && !`${row.ano} ${anoLabel(row.ano)} ${row.escola} ${row.turma}`.toLowerCase().includes(q)) return false;
     return true;
   });
 }
@@ -169,6 +2532,7 @@ function predominante(bloco) {
 function toggleFilter(key, value) {
   state[key] = state[key] === value ? "" : value;
   if (key === "escola") state.turma = "";
+  if (key === "ano") { state.escola = ""; state.turma = ""; }
   state.page = 1;
   syncSelects();
   render();
@@ -184,26 +2548,33 @@ function setView(view) {
 }
 
 function escolasUnicas() {
-  return [...new Set(DADOS.map((r) => r.escola))].sort((a, b) => a.localeCompare(b, "pt-BR"));
+  return [...new Set(DADOS.filter((r) => !state.ano || String(r.ano) === String(state.ano)).map((r) => r.escola))]
+    .sort((a, b) => a.localeCompare(b, "pt-BR"));
 }
 
 function turmasDaEscola(escola) {
-  return [...new Set(DADOS.filter((r) => !escola || r.escola === escola).map((r) => r.turma))];
+  return [...new Set(
+    DADOS.filter((r) => {
+      if (state.ano && String(r.ano) !== String(state.ano)) return false;
+      if (escola && r.escola !== escola) return false;
+      return true;
+    }).map((r) => r.turma)
+  )].sort((a, b) => a.localeCompare(b, "pt-BR"));
 }
 
 function fillSelects() {
-  const escolaSel = document.getElementById("filterEscola");
-  const turmaSel = document.getElementById("filterTurma");
-  escolaSel.innerHTML = `<option value="">Todas as escolas</option>` +
-    escolasUnicas().map((e) => `<option value="${e}">${e}</option>`).join("");
   syncSelects();
-  turmaSel.innerHTML = `<option value="">Todas as turmas</option>` +
-    turmasDaEscola(state.escola).map((t) => `<option value="${t}">${t}</option>`).join("");
 }
 
 function syncSelects() {
-  document.getElementById("filterEscola").value = state.escola;
+  document.getElementById("filterAno").value = state.ano;
+  const escolaSel = document.getElementById("filterEscola");
   const turmaSel = document.getElementById("filterTurma");
+  const escolas = escolasUnicas();
+  escolaSel.innerHTML = `<option value="">Todas as escolas</option>` +
+    escolas.map((e) => `<option value="${e}">${e}</option>`).join("");
+  if (state.escola && !escolas.includes(state.escola)) state.escola = "";
+  escolaSel.value = state.escola;
   const turmas = turmasDaEscola(state.escola);
   turmaSel.innerHTML = `<option value="">Todas as turmas</option>` +
     turmas.map((t) => `<option value="${t}">${t}</option>`).join("");
@@ -223,6 +2594,7 @@ function pillHtml(delta, invert = false) {
 function renderChips() {
   const box = document.getElementById("chips");
   const chips = [];
+  if (state.ano) chips.push(["ano", "Ano", anoLabel(state.ano)]);
   if (state.escola) chips.push(["escola", "Escola", state.escola]);
   if (state.turma) chips.push(["turma", "Turma", state.turma]);
   if (state.nivel) chips.push(["nivel", "Nível", nivelLabel(state.nivel)]);
@@ -251,6 +2623,7 @@ function renderKPIs(rows) {
   const preEntPct = pct(preEnt, entrada.avaliados);
   const hasEntrada = entrada.avaliados > 0;
   const comparativo = isComparativo();
+  const anosTxt = state.ano ? anoLabel(state.ano) : "2º–5º anos";
 
   const esquerda = [
     {
@@ -258,18 +2631,18 @@ function renderKPIs(rows) {
       title: "Total de alunos",
       value: fmt(alunos),
       pill: `<span class="pill neutral">${rows.length} turmas</span>`,
-      foot: "Matrículas no recorte atual",
+      foot: `${anosTxt} · matrículas no recorte`,
       icon: `<div class="kpi-icon tot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`,
     },
     {
       key: "",
-      title: comparativo ? "Avaliados (Percurso)" : "Alunos avaliados",
+      title: comparativo ? "Avaliados (Ciclo II)" : "Alunos avaliados",
       value: fmt(atual.avaliados),
       pill: comparativo
-        ? `<span class="pill neutral">Entrada ${fmt(entrada.avaliados)}</span>`
+        ? `<span class="pill neutral">Ciclo I ${fmt(entrada.avaliados)}</span>`
         : `<span class="pill ${pct(atual.avaliados, alunos) >= 90 ? "up" : "neutral"}">${fmtPct(pct(atual.avaliados, alunos))}</span>`,
       foot: comparativo
-        ? `Entrada ${fmt(entrada.avaliados)} · Percurso ${fmt(percurso.avaliados)}`
+        ? `Ciclo I ${fmt(entrada.avaliados)} · Ciclo II ${fmt(percurso.avaliados)}`
         : "Quantidade avaliada no filtro atual",
       icon: `<div class="kpi-icon ava" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3L22 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`,
     },
@@ -278,7 +2651,7 @@ function renderKPIs(rows) {
       title: "Cobertura da avaliação",
       value: fmtPct(pct(atual.avaliados, alunos)),
       pill: `<span class="pill ${pct(atual.avaliados, alunos) >= 90 ? "up" : "neutral"}">${fmt(atual.avaliados)} de ${fmt(alunos)}</span>`,
-      foot: comparativo ? "Cobertura no Percurso — Ciclo II" : "Avaliados sobre o total de alunos",
+      foot: comparativo ? "Cobertura no Ciclo II — Percurso" : "Avaliados sobre o total de alunos",
       icon: `<div class="kpi-icon cov" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M21.21 15.89A10 10 0 1 1 8 2.83" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 12A10 10 0 0 0 12 2v10z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`,
     },
   ];
@@ -323,7 +2696,7 @@ function renderKPIs(rows) {
   document.getElementById("kpiRight").innerHTML = direita.map(kpiHtml).join("");
 }
 
-const THEME_KEY = "fluencia-theme";
+const THEME_KEY = "fluencia-theme-all";
 
 function currentTheme() {
   return document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
@@ -398,14 +2771,12 @@ const stackValueLabels = {
     ctx.save();
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-
     chart.data.datasets.forEach((dataset, datasetIndex) => {
       const meta = chart.getDatasetMeta(datasetIndex);
       if (!meta.visible) return;
       meta.data.forEach((bar, index) => {
         const value = Number(dataset.data[index] || 0);
         if (!value) return;
-
         const width = Math.abs(bar.x - bar.base);
         const height = Math.abs(bar.height);
         const label = fmt(value);
@@ -413,13 +2784,11 @@ const stackValueLabels = {
         const byHeight = height * 0.7;
         const fontSize = Math.min(11, byWidth, byHeight);
         if (fontSize < 6.5) return;
-
         ctx.font = `700 ${fontSize}px DM Sans, sans-serif`;
         ctx.fillStyle = "#000000";
         ctx.fillText(label, (bar.base + bar.x) / 2, bar.y);
       });
     });
-
     ctx.restore();
   },
 };
@@ -431,17 +2800,14 @@ const donutValueLabels = {
     ctx.save();
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-
     chart.data.datasets.forEach((dataset, datasetIndex) => {
       const meta = chart.getDatasetMeta(datasetIndex);
       if (!dataset || !meta?.visible) return;
       const total = dataset.data.reduce((acc, value) => acc + Number(value || 0), 0);
       if (!total) return;
-
       meta.data.forEach((arc, index) => {
         const value = Number(dataset.data[index] || 0);
         if (!value) return;
-
         const angle = arc.endAngle - arc.startAngle;
         const mid = (arc.startAngle + arc.endAngle) / 2;
         const ring = arc.outerRadius - arc.innerRadius;
@@ -454,12 +2820,10 @@ const donutValueLabels = {
         const maxFont = datasetIndex === 0 && chart.data.datasets.length > 1 ? 12 : 16;
         const fontSize = Math.max(6, Math.min(maxFont, byArc, byRing));
         const outline = Math.max(1.2, fontSize * 0.2);
-
         ctx.font = `700 ${fontSize}px DM Sans, sans-serif`;
         drawOutlinedText(ctx, percent, x, y, outline);
       });
     });
-
     ctx.restore();
   },
 };
@@ -485,16 +2849,16 @@ function renderDonut(rows) {
   const colorFor = (n) => (!state.nivel || matchesNivel(n.key) ? n.color : `${n.color}55`);
 
   document.getElementById("chartDonutTitle").textContent = comparativo
-    ? "Distribuição por nível · Entrada × Percurso"
+    ? "Distribuição por nível · Ciclo I × Ciclo II"
     : "Distribuição por nível";
   document.getElementById("chartDonutSub").textContent = comparativo
-    ? "Anel externo: Entrada · Anel interno: Percurso — Ciclo II"
+    ? "Anel externo: Ciclo I · Anel interno: Ciclo II"
     : "Clique em um segmento para filtrar";
 
   document.getElementById("donutLegend").innerHTML = NIVEIS.map((n, i) => {
     const active = Boolean(state.nivel) && matchesNivel(n.key);
     const detail = comparativo
-      ? `E ${fmt(valuesEntrada[i])} (${fmtPct(pct(valuesEntrada[i], totalEntrada))}) → P ${fmt(valuesPercurso[i])} (${fmtPct(pct(valuesPercurso[i], totalPercurso))})`
+      ? `I ${fmt(valuesEntrada[i])} (${fmtPct(pct(valuesEntrada[i], totalEntrada))}) → II ${fmt(valuesPercurso[i])} (${fmtPct(pct(valuesPercurso[i], totalPercurso))})`
       : `${fmt(values[i])} · ${fmtPct(pct(values[i], total))}`;
     return `<li data-nivel="${n.key}" class="${active ? "active" : ""}">
       <span class="swatch" style="background:${n.color}"></span>
@@ -506,7 +2870,7 @@ function renderDonut(rows) {
   const datasets = comparativo
     ? [
         {
-          label: "Entrada",
+          label: "Ciclo I",
           data: valuesEntrada,
           backgroundColor: NIVEIS.map(colorFor),
           borderColor: border,
@@ -515,7 +2879,7 @@ function renderDonut(rows) {
           weight: 1.15,
         },
         {
-          label: "Percurso — Ciclo II",
+          label: "Ciclo II",
           data: valuesPercurso,
           backgroundColor: NIVEIS.map(colorFor),
           borderColor: border,
@@ -575,7 +2939,6 @@ function renderComparativo(rows) {
     if (!state.nivel) return color;
     return matchesNivel(key) ? color : `${color}55`;
   };
-
   const ink = cssVar("--text") || "#ffffff";
   upsertChart("chartComparativo", {
     type: "bar",
@@ -584,14 +2947,14 @@ function renderComparativo(rows) {
       labels,
       datasets: [
         {
-          label: "Entrada",
+          label: "Ciclo I",
           data: NIVEIS.map((n) => entrada[n.key]),
           backgroundColor: NIVEIS.map((n) => dim("#002776", n.key)),
           borderRadius: 8,
           barPercentage: 0.72,
         },
         {
-          label: "Percurso — Ciclo II",
+          label: "Ciclo II",
           data: NIVEIS.map((n) => percurso[n.key]),
           backgroundColor: NIVEIS.map((n) => dim("#009B3A", n.key)),
           borderRadius: 8,
@@ -633,12 +2996,15 @@ function renderEscolas(rows) {
   const groups = new Map();
 
   rows.forEach((row) => {
-    const key = drillTurmas ? `Turma ${row.turma}` : row.escola;
+    const key = drillTurmas
+      ? (state.ano ? `Turma ${row.turma}` : `${anoLabel(row.ano)} · ${row.turma}`)
+      : row.escola;
     if (!groups.has(key)) {
       groups.set(key, {
         label: key,
         escola: row.escola,
         turma: row.turma,
+        ano: row.ano,
         alunos: 0,
         entrada: emptyAgg(),
         percurso: emptyAgg(),
@@ -665,10 +3031,10 @@ function renderEscolas(rows) {
     ? `Composição por turma · ${shortSchool(state.escola)}`
     : "Composição por escola";
   document.getElementById("chartEscolasTitle").textContent = comparativo
-    ? `${titleBase} · Entrada × Percurso`
+    ? `${titleBase} · Ciclo I × Ciclo II`
     : titleBase;
   document.getElementById("chartEscolasSub").textContent = comparativo
-    ? "Cada escola: barra superior = Entrada · barra inferior = Percurso — Ciclo II"
+    ? "Cada escola: barra superior = Ciclo I · barra inferior = Ciclo II"
     : "Clique em uma barra ou fatia para filtrar escola e nível";
 
   const wrap = document.getElementById("chartEscolasWrap");
@@ -681,7 +3047,7 @@ function renderEscolas(rows) {
   const datasets = comparativo
     ? [
         ...niveisVisiveis.map((n) => ({
-          label: `Entrada · ${n.label}`,
+          label: `Ciclo I · ${n.label}`,
           data: items.map((i) => i.entrada[n.key]),
           backgroundColor: `${n.color}99`,
           borderSkipped: false,
@@ -689,11 +3055,10 @@ function renderEscolas(rows) {
           barPercentage: 0.9,
           categoryPercentage: 0.78,
           stack: "entrada",
-          periodo: "entrada",
           nivelKey: n.key,
         })),
         ...niveisVisiveis.map((n) => ({
-          label: `Percurso · ${n.label}`,
+          label: `Ciclo II · ${n.label}`,
           data: items.map((i) => i.percurso[n.key]),
           backgroundColor: n.color,
           borderSkipped: false,
@@ -701,7 +3066,6 @@ function renderEscolas(rows) {
           barPercentage: 0.9,
           categoryPercentage: 0.78,
           stack: "percurso",
-          periodo: "percurso",
           nivelKey: n.key,
         })),
       ]
@@ -729,7 +3093,7 @@ function renderEscolas(rows) {
         const ds = datasets[els[0].datasetIndex];
         const nivel = ds?.nivelKey || "";
         const sameSchool = drillTurmas
-          ? state.turma === item.turma
+          ? state.turma === item.turma && (!state.ano || String(state.ano) === String(item.ano))
           : state.escola === item.escola;
         const sameNivel = !nivel || state.nivel === nivel;
         if (sameSchool && sameNivel) {
@@ -737,8 +3101,10 @@ function renderEscolas(rows) {
           else { state.escola = ""; state.turma = ""; }
           if (nivel) state.nivel = "";
         } else {
-          if (drillTurmas) state.turma = item.turma;
-          else { state.escola = item.escola; state.turma = ""; }
+          if (drillTurmas) {
+            state.turma = item.turma;
+            if (!state.ano) state.ano = String(item.ano);
+          } else { state.escola = item.escola; state.turma = ""; }
           if (nivel) state.nivel = nivel;
         }
         state.page = 1;
@@ -786,6 +3152,7 @@ function sortedRows(rows) {
     const blocoA = blocoAtivo(a) || emptyAgg();
     const blocoB = blocoAtivo(b) || emptyAgg();
     const map = {
+      ano: String(a.ano).localeCompare(String(b.ano), "pt-BR"),
       escola: a.escola.localeCompare(b.escola, "pt-BR"),
       turma: a.turma.localeCompare(b.turma, "pt-BR"),
       alunos: a.alunos - b.alunos,
@@ -815,7 +3182,8 @@ function renderTable(rows) {
     const bloco = blocoAtivo(row);
     const pred = predominante(bloco);
     const cells = NIVEIS.map((n) => `<td>${bloco ? fmt(bloco[n.key]) : "—"}</td>`).join("");
-    return `<tr class="clickable" data-escola="${row.escola}" data-turma="${row.turma}">
+    return `<tr class="clickable" data-ano="${row.ano}" data-escola="${row.escola}" data-turma="${row.turma}">
+      <td>${anoLabel(row.ano)}</td>
       <td>${row.escola}</td>
       <td>${row.turma}</td>
       <td>${fmt(row.alunos)}</td>
@@ -829,16 +3197,16 @@ function renderTable(rows) {
 function exportCsv(rows) {
   if (isComparativo()) {
     const header = [
-      "Escola", "Turma", "Alunos",
-      "Avaliados (Entrada)", ...NIVEIS.map((n) => `${n.label} (Entrada)`),
-      "Avaliados (Percurso)", ...NIVEIS.map((n) => `${n.label} (Percurso)`),
+      "Ano", "Escola", "Turma", "Alunos",
+      "Avaliados (Ciclo I)", ...NIVEIS.map((n) => `${n.label} (Ciclo I)`),
+      "Avaliados (Ciclo II)", ...NIVEIS.map((n) => `${n.label} (Ciclo II)`),
     ];
     const lines = [header.join(";")];
     rows.forEach((row) => {
       const entrada = row.entrada || emptyAgg();
       const percurso = row.percurso || emptyAgg();
       lines.push([
-        row.escola, row.turma, row.alunos,
+        anoLabel(row.ano), row.escola, row.turma, row.alunos,
         entrada.avaliados || "", ...NIVEIS.map((n) => entrada[n.key] || 0),
         percurso.avaliados || "", ...NIVEIS.map((n) => percurso[n.key] || 0),
       ].join(";"));
@@ -847,29 +3215,30 @@ function exportCsv(rows) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "fluencia-leitora-2ano-comparativo.csv";
+    a.download = "fluencia-leitora-2-a-5-anos-comparativo.csv";
     a.click();
     URL.revokeObjectURL(url);
     return;
   }
 
-  const periodo = state.periodo === "entrada" ? "Entrada" : "Percurso";
-  const header = ["Escola", "Turma", "Alunos", `Avaliados (${periodo})`, ...NIVEIS.map((n) => n.label)];
+  const periodo = state.periodo === "entrada" ? "Ciclo I" : "Ciclo II";
+  const header = ["Ano", "Escola", "Turma", "Alunos", `Avaliados (${periodo})`, ...NIVEIS.map((n) => n.label)];
   const lines = [header.join(";")];
   rows.forEach((row) => {
     const bloco = blocoAtivo(row) || emptyAgg();
-    lines.push([row.escola, row.turma, row.alunos, bloco.avaliados || "", ...NIVEIS.map((n) => bloco[n.key] || 0)].join(";"));
+    lines.push([anoLabel(row.ano), row.escola, row.turma, row.alunos, bloco.avaliados || "", ...NIVEIS.map((n) => bloco[n.key] || 0)].join(";"));
   });
   const blob = new Blob(["\uFEFF" + lines.join("\n")], { type: "text/csv;charset=utf-8;" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = "fluencia-leitora-2ano.csv";
+  a.download = "fluencia-leitora-2-a-5-anos.csv";
   a.click();
   URL.revokeObjectURL(url);
 }
 
 function resetAll() {
+  state.ano = "";
   state.escola = "";
   state.turma = "";
   state.nivel = "";
@@ -898,6 +3267,14 @@ function bindEvents() {
   });
   document.getElementById("btnResetAll").addEventListener("click", resetAll);
   document.getElementById("btnTheme").addEventListener("click", toggleTheme);
+  document.getElementById("filterAno").addEventListener("change", (e) => {
+    state.ano = e.target.value;
+    state.escola = "";
+    state.turma = "";
+    state.page = 1;
+    syncSelects();
+    render();
+  });
   document.getElementById("filterEscola").addEventListener("change", (e) => {
     state.escola = e.target.value;
     state.turma = "";
@@ -927,7 +3304,8 @@ function bindEvents() {
     if (key === "all") return resetAll();
     if (key === "search") document.getElementById("searchInput").value = "";
     state[key] = "";
-    if (key === "escola") state.turma = "";
+    if (key === "escola" || key === "ano") state.turma = "";
+    if (key === "ano") state.escola = "";
     state.page = 1;
     syncSelects();
     render();
@@ -950,6 +3328,7 @@ function bindEvents() {
   document.getElementById("tableBody").addEventListener("click", (e) => {
     const tr = e.target.closest("tr");
     if (!tr) return;
+    state.ano = tr.dataset.ano || "";
     state.escola = tr.dataset.escola;
     state.turma = tr.dataset.turma;
     state.page = 1;
