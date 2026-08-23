@@ -3257,7 +3257,7 @@ function renderTable(rows) {
       <td class="num">${fmt(row.alunos)}</td>
       <td class="num">${bloco ? fmt(bloco.avaliados) : "—"}</td>
       ${cells}
-      <td>${pred ? `<span class="tag ${pred.key}">${pred.label}</span>` : `<span class="tag none">Sem dados</span>`}</td>
+      <td class="num">${pred ? `<span class="tag ${pred.key}">${pred.label}</span>` : `<span class="tag none">Sem dados</span>`}</td>
     </tr>`;
   }).join("");
 }
