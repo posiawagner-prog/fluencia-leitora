@@ -3106,7 +3106,7 @@ function renderEscolas(rows) {
   wrap.classList.toggle("comparativo", comparativo);
   wrap.style.height = comparativo
     ? `${Math.max(520, items.length * 36)}px`
-    : `${Math.max(560, items.length * 40)}px`;
+    : `${Math.max(480, items.length * 28)}px`;
 
   const labels = items.map((i) => (drillTurmas ? i.label : shortSchool(i.label)));
   const niveisVisiveis = NIVEIS.filter((n) => matchesNivel(n.key));
@@ -3142,8 +3142,8 @@ function renderEscolas(rows) {
         backgroundColor: n.color,
         borderSkipped: false,
         borderRadius: 4,
-        barPercentage: 0.98,
-        categoryPercentage: 0.96,
+        barPercentage: 0.72,
+        categoryPercentage: 0.82,
         nivelKey: n.key,
       }));
 

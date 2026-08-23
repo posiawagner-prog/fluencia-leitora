@@ -496,7 +496,7 @@ html[data-theme="light"] .theme-switch-knob {
 .chart-wrap { position: relative; }
 .chart-wrap.tall { height: 290px; }
 .chart-wrap.donut { height: 340px; }
-.chart-wrap.escolas { height: 560px; }
+.chart-wrap.escolas { height: 480px; }
 
 .layout-bottom {
   display: grid;
